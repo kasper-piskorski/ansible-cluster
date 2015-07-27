@@ -10,7 +10,6 @@
        - software-properties-common
        - python-software-properties
        - libtool
-       - libuuid-devel
        - gcc-c++
        - uuid-dev
 
