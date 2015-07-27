@@ -1,0 +1,31 @@
+---
+
+# Sort out dependencies
+
+# Setup directory structure
+- name: Setup group
+  group: name={{group_name}} system=yes
+
+- name: Setup user
+  user: name={{user_name}} system=yes group={{group_name}}
+
+- name: Create cluster home directory
+  file: path={{cluster_home}} state=directory owner={{user_name}} group={{group_name}} mode=755
+
+# Installation
+
+- name: Create log and local directories
+  file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=775
+  with_items:
+    - "{{cluster_home}}/zookeeper"
+    - "/var/log/{{cluster_path}}/zookeeper"
+
+- name: Fetch package
+  get_url: dest={{cluster_home}} url={{mirror}}/zookeeper/zookeeper-{{version}}/zookeeper-{{version}}.tar.gz
+  
+
+- name: Uncompress the storm tar
+  unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/zookeeper-{{version}}.tar.gz"
+
+- name: Mv to server
+  command: mv {{cluster_home}}/zookeeper-{{version}} {{cluster_home}}/zookeeper/server
