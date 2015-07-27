@@ -45,6 +45,7 @@ stderr_events_enabled=true
 [group:storm]
 programs={% for daemon in storm_daemons %}storm-{{daemon}} {% if not loop.last %}, {% endif %}{% endfor %}
 
+
 {% for daemon in storm_daemons %}
 [program:storm-{{daemon}}]
 command=storm {{daemon}}
