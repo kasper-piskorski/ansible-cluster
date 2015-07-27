@@ -22,7 +22,7 @@
   apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=EEA14886 state=present
 
 - name: Accept licence automatically
-  lineinfile: dest=/usr/bin/debconf-set-selections line="oracle-java8-installer shared/accepted-oracle-license-v1-1 select true"
+  command: echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
 
 - name: Install Oracle JDK 8
   apt: update_cache=yes name=oracle-java8-installer state=present
