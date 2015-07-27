@@ -1,5 +1,40 @@
 ---
 # Sort out dependencies
+- name: Install packages
+  apt: name={{item}} state=present
+  with_items:
+       - make
+       - autotools-dev
+       - autoconf
+       - git
+       - software-properties-common
+       - python-software-properties
+       - libtool
+       - libuuid-devel
+       - gcc-c++
+       - uuid-dev
+
+# Oracle JDK 8
+- set_fact: java_repo_file="/etc/apt/sources.list.d/webupd8team-java.list"
+- file: path={{java_repo_file}} state=touch
+- lineinfile: dest={{java_repo_file}} line="deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main"
+- lineinfile: dest={{java_repo_file}} line="deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main"
+
+- name: Add repository key
+  apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=EEA14886 state=present
+
+- name: Accept licence automatically
+  lineinfile: dest=/usr/bin/debconf-set-selections line="oracle-java8-installer shared/accepted-oracle-license-v1-1 select true"
+
+- name: Install Oracle JDK 8
+  apt: update=yes name=oracle-java8-installer state=present
+
+- name: Install ZeroMQ
+  apt: name={{item}} state=present
+  with_items:
+       - build-essential
+       - libsodium
+       - libzmq3-dev
 
 # Setup directory structure
 - name: Setup group
