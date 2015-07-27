@@ -1,1 +1,19 @@
 ---
+- name: Create log and local directories
+  file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=775
+  with_items:
+    - "{{cluster_home}}/storm"
+    - "{{cluster_home}}/storm/local"
+    - "{{log_home}}/storm"
+
+- name: Fetch storm package
+  get_url: dest={{ cluster_home }}/{{ storm_tarball_name }} url={{storm_mirror}}/storm/apache-storm-{{storm_version}}/{{ storm_tarball_name }}
+
+- name: Uncompress the storm tar
+  unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/{{storm_tarball_name}}"
+
+- name: Mv to server
+  command: mv {{cluster_home}}/apache-storm-{{storm_version}} {{cluster_home}}/storm/server
+
+- name: set Storm server dir
+  set_fact: storm_server_dir="{{cluster_home}}/storm/server"
