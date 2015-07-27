@@ -10,7 +10,6 @@
        - software-properties-common
        - python-software-properties
        - libtool
-       - gcc-c++
        - uuid-dev
 
 # Oracle JDK 8
