@@ -42,6 +42,9 @@ stderr_logfile_maxbytes=100MB
 stderr_logfile_backups=10
 stderr_events_enabled=true
 
+[group:storm]
+programs={% for daemon in storm_daemons %}storm-{{daemon}} {% if not loop.last %}, {% endif %}{% endfor %}
+
 {% for daemon in storm_daemons %}
 [program:storm-{{daemon}}]
 command=storm {{daemon}}
@@ -51,4 +54,5 @@ autostart=true
 autorestart=true
 stderr_logfile={{log_home}}/{{daemon}}-err
 stdout_logfile={{log_home}}/{{daemon}}-out
+
 {% endfor %}
