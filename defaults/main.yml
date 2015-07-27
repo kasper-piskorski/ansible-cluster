@@ -30,6 +30,8 @@ storm_tarball_name: "apache-storm-{{storm_version}}.tar.gz"
 
 storm_daemons: [nimbus, supervisor]
 
+nimbus_host: 127.0.0.1
+
 nimbus_thrift_port: 6627
 storm_drpc_extra_config:
 storm_local_dir: "{{cluster_home}}/storm/local"
