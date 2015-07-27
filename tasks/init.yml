@@ -1,0 +1,13 @@
+---
+# Sort out dependencies
+
+# Setup directory structure
+- name: Setup group
+  group: name={{group_name}} system=yes
+
+- name: Setup user
+  user: name={{user_name}} system=yes group={{group_name}}
+
+- name: Create cluster home directory
+  file: path={{cluster_home}} state=directory owner={{user_name}} group={{group_name}} mode=755
+

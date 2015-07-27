@@ -1,0 +1,43 @@
+; supervisor config file
+
+[unix_http_server]
+file=/var/run/supervisor.sock   ; (the path to the socket file)
+chmod=0700                       ; sockef file mode (default 0700)
+
+[supervisord]
+logfile={{log_home}}/supervisor/supervisord.log ; (main log file;default $CWD/supervisord.log)
+pidfile=/var/run/supervisord.pid ; (supervisord pidfile;default supervisord.pid)
+childlogdir={{log_home}}/supervisor            ; ('AUTO' child log dir, default $TEMP)
+
+; the below section must remain in the config file for RPC
+; (supervisorctl/web interface) to work, additional interfaces may be
+; added by defining them in separate rpcinterface: sections
+[rpcinterface:supervisor]
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
+
+[supervisorctl]
+serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL  for a unix socket
+
+; The [include] section can just contain the "files" setting.  This
+; setting can list multiple files (separated by whitespace or
+; newlines).  It can also contain wildcards.  The filenames are
+; interpreted as relative to this file.  Included files *cannot*
+; include files themselves.
+
+[include]
+files = /etc/supervisor/conf.d/*.conf
+
+[program:zk-server]
+command=zkServer.sh start
+directory={{zookeeper_server_dir}}/bin
+user={{user_name}}
+autostart=true
+autorestart=true
+stdout_logfile={{log_home}}/zookeeper/zookeeper-out
+stdout_logfile_maxbytes=10MB
+stdout_logfile_backups=10
+stdout_events_enabled=true
+stderr_logfile={{log_home}}/zookeeper/zookeeper-err
+stderr_logfile_maxbytes=100MB
+stderr_logfile_backups=10
+stderr_events_enabled=true

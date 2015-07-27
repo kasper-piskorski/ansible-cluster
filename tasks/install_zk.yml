@@ -1,0 +1,21 @@
+---
+
+# Installation
+
+- name: Create log and local directories
+  file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=775
+  with_items:
+    - "{{cluster_home}}/zookeeper"
+    - "{{log_home}}/zookeeper"
+
+- name: Fetch package
+  get_url: dest={{cluster_home}} url={{zk_mirror}}/zookeeper/zookeeper-{{zk_version}}/zookeeper-{{zk_version}}.tar.gz
+  
+- name: Uncompress the storm tar
+  unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/zookeeper-{{zk_version}}.tar.gz"
+
+- name: Mv to server
+  command: mv {{cluster_home}}/zookeeper-{{zk_version}} {{cluster_home}}/zookeeper/server
+
+- name: set ZK server dir
+  set_fact: zookeeper_server_dir="{{cluster_home}}/zookeeper/server"

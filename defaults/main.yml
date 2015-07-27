@@ -2,14 +2,17 @@
 root_dir: /test
 cluster_path: ontoit/cluster
 cluster_home: "{{root_dir}}/{{cluster_path}}"
+log_home : "/var/log/{{cluster_path}}"
 user_name: test_user
 group_name: test_group
 
-mirror: http://mirrors.muzzy.org.uk/apache          
-version: 3.4.6
+#ZOOKEEPER vars
+
+zk_mirror: http://mirrors.muzzy.org.uk/apache          
+zk_version: 3.4.6
 
 zookeeper_maxClientCnxns: 60
 zookeeper_client_port: 2181
-zookeeper_hosts: "{{localhost}}:2181"
+zookeeper_hosts: localhost:2181
 run_mode: Deploy
 

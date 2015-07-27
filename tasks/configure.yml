@@ -1,0 +1,10 @@
+---
+- name: Setup zoo.cfg
+  template: dest="{{zookeeper_server_dir}}/conf/zoo.cfg" src=zoo.cfg.j2
+
+- name: Configure supervisord
+  template: dest=/etc/supervisor/supervisor.conf src=supervisor.conf.j2
+
+#- name: Configure storm
+#  template: dest="{{storm_server_dir}}/conf/storm.yaml" src=storm.yaml.j2
+
