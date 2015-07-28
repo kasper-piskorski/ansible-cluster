@@ -16,7 +16,7 @@
   command: ls {{cluster_home}}
 
 - name: Uncompress the neo4j tar
-  unarchive: copy=no  dest={{cluster_home}} src={{cluster_home}}/{{neo4j_tarball_name}}
+  unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/{{neo4j_tarball_name}}"
 
 - name: Mv to server
   command: mv {{cluster_home}}/neo4j-enterprise-{{neo4j_version}} {{cluster_home}}/neo4j/server
