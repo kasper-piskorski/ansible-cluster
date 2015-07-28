@@ -13,7 +13,7 @@
   when: neo4j_tarball.stat.exists == False
 
 - name: ls cluster home
-  find: paths={{cluster_home}} recurse=no
+  command: ls {{cluster_home}}
 
 - name: Uncompress the neo4j tar
   unarchive: copy=no  dest={{cluster_home}} src={{cluster_home}}/{{neo4j_tarball_name}}
