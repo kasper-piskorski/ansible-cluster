@@ -3,33 +3,26 @@ root_dir: /test
 cluster_path: ontoit/cluster
 cluster_home: "{{root_dir}}/{{cluster_path}}"
 log_home : "/var/log/{{cluster_path}}"
+
+#user and group running the cluster
 user_name: test_user
 group_name: test_group
 
 #ZOOKEEPER vars
-
-zk_mirror: http://mirrors.muzzy.org.uk/apache          
+      
 zk_version: 3.4.6
-zk_tarball_name: "zookeeper-{{zk_version}}.tar.gz"
 
 zookeeper_maxClientCnxns: 60
 zookeeper_client_port: 2181
 zookeeper_hosts: localhost:2181
-run_mode: Deploy
+
+zk_mirror: http://mirrors.muzzy.org.uk/apache
+zk_tarball_name: "zookeeper-{{zk_version}}.tar.gz"
 
 #STORM vars
 
-storm_mirror: http://apache.mirrors.tds.net
 storm_version: 0.9.5
-storm_tarball_name: "apache-storm-{{storm_version}}.tar.gz"
-
-#storm_nimbus_enabled: false
-#storm_supervisor_enabled: false
-#storm_ui_enabled: false
-#storm_logviewer_enabled: false
-
 storm_daemons: [nimbus, supervisor]
-
 nimbus_host: 127.0.0.1
 
 nimbus_thrift_port: 6627
@@ -60,3 +53,7 @@ storm_zookeeper_extra_config:
     storm.zookeeper.retry.times: 60
     storm.zookeeper.root: "/storm"
     storm.zookeeper.session.timeout: 3000
+
+storm_mirror: http://apache.mirrors.tds.net
+storm_tarball_name: "apache-storm-{{storm_version}}.tar.gz"
+
