@@ -2,5 +2,6 @@
 - include: init.yml
 - include: install_zk.yml
 - include: install_storm.yml
+- include: install_neo4j.yml
 - include: install_supervisor.yml
 - include: configure.yml
