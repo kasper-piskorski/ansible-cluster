@@ -8,3 +8,9 @@
 - name: Configure storm
   template: dest="{{storm_server_dir}}/conf/storm.yaml" owner={{user_name}} group={{group_name}} src=storm.yaml.j2
 
+- name: Configure neo4j.properties
+  template: dest="{{neo4j_server_dir}}/conf/neo4j.properties" owner={{user_name}} group={{group_name}} src=neo4j.properties.j2
+
+- name: Configure neo4j-server.properties
+  template: dest="{{neo4j_server_dir}}/conf/neo4j-server.properties" owner={{user_name}} group={{group_name}} src=neo4j-server.properties.j2
+

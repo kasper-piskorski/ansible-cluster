@@ -12,7 +12,7 @@
   get_url: dest={{cluster_home}} url={{zk_mirror}}/zookeeper/zookeeper-{{zk_version}}/{{zk_tarball_name}}
   
 - name: Uncompress the storm tar
-  unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/{{zk_tarball_name}}"
+  unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/{{zk_tarball_name}}" owner={{user_name}} group={{group_name}}
 
 - name: Mv to server
   command: mv {{cluster_home}}/zookeeper-{{zk_version}} {{cluster_home}}/zookeeper/server

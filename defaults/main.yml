@@ -61,3 +61,23 @@ storm_tarball_name: "apache-storm-{{storm_version}}.tar.gz"
 
 neo4j_dropbox_link: https://www.dropbox.com/s/s7m52y3win8jcf6/neo4j-enterprise-2.2.3-unix.tar.gz?dl=0
 neo4j_tarball_name: neo4j-enterprise-2.2.3-unix.tar.gz
+
+neo4j_host: localhost
+neo4j_ha_initial_hosts: "{{neo4j_host}}:5001"
+
+neo4j_ha_server_id: 1
+neo4j_ha_server: "{{neo4j_host}}:6363"
+neo4j_online_backup_server = "{{neo4j_host}}:6366"
+neo4j_ha_cluster_server = "{{neo4j_host}}:5001"
+
+neo4j_dbms.pagecache.memory=500m
+
+neo4j_ha_pull_interval=5
+neo4j_ha_tx_push_factor=1
+neo4j_ha_tx_push_strategy=fixed
+neo4j_ha_default_timeout=5s
+neo4j_ha_heartbeat_interval=5s
+
+neo4j_database_location: data/graph.db
+neo4j_webserver_port: 7474
+neo4j_webserver_https_port: 7484

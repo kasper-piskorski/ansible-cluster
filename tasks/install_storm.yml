@@ -10,7 +10,7 @@
   get_url: dest={{ cluster_home }}/{{ storm_tarball_name }} url={{storm_mirror}}/storm/apache-storm-{{storm_version}}/{{ storm_tarball_name }}
 
 - name: Uncompress the storm tar
-  unarchive: copy=no  dest={{cluster_home}} src={{cluster_home}}/{{storm_tarball_name}}
+  unarchive: copy=no  dest={{cluster_home}} src={{cluster_home}}/{{storm_tarball_name}} owner={{user_name}} group={{group_name}}
 
 - name: Mv to server
   command: mv {{cluster_home}}/apache-storm-{{storm_version}} {{cluster_home}}/storm/server
