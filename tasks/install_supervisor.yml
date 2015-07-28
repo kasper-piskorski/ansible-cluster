@@ -1,3 +1,8 @@
 ---
+- name: Create log directory
+  file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=775
+  with_items:
+    - "{{log_home}}/supervisor"
+
 - name: Install Supervisor
   apt: name=supervisor state=present

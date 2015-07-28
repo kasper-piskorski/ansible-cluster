@@ -51,6 +51,8 @@
 - name: Setup user
   user: name={{user_name}} system=yes group={{group_name}}
 
-- name: Create cluster home directory
-  file: path={{cluster_home}} state=directory owner={{user_name}} group={{group_name}} mode=755
-
+- name: Create cluster home and log directory
+  file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
+  with_items:
+       - "{{cluster_home}}"
+       - "{{log_home}}"

@@ -28,8 +28,8 @@ serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL  for a unix socket
 files = /etc/supervisor/conf.d/*.conf
 
 [program:zk-server]
-command=zkServer.sh start
-directory={{zookeeper_server_dir}}/bin
+command={{zookeeper_server_dir}/bin/zkServer.sh start
+#directory={{zookeeper_server_dir}}/bin
 user={{user_name}}
 autostart=true
 autorestart=true
@@ -48,8 +48,8 @@ programs={% for daemon in storm_daemons %}storm-{{daemon}} {% if not loop.last %
 
 {% for daemon in storm_daemons %}
 [program:storm-{{daemon}}]
-command=storm {{daemon}}
-directory={{cluster_home}}/storm/server/bin
+command={{cluster_home}}/storm/server/bin/storm {{daemon}}
+#directory={{cluster_home}}/storm/server/bin
 user={{user_name}}
 autostart=true
 autorestart=true
