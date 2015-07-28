@@ -8,7 +8,7 @@ log_home : "/var/log/{{cluster_path}}"
 user_name: test_user
 group_name: test_group
 
-#ZOOKEEPER vars
+### ZOOKEEPER settings
       
 zk_version: 3.4.6
 
@@ -19,7 +19,7 @@ zookeeper_hosts: localhost:2181
 zk_mirror: http://mirrors.muzzy.org.uk/apache
 zk_tarball_name: "zookeeper-{{zk_version}}.tar.gz"
 
-#STORM vars
+### STORM settings
 
 storm_version: 0.9.5
 storm_daemons: [nimbus, supervisor]
@@ -57,3 +57,7 @@ storm_zookeeper_extra_config:
 storm_mirror: http://apache.mirrors.tds.net
 storm_tarball_name: "apache-storm-{{storm_version}}.tar.gz"
 
+### Neo4j settings
+
+neo4j_dropbox_link: https://www.dropbox.com/s/s7m52y3win8jcf6/neo4j-enterprise-2.2.3-unix.tar.gz?dl=0
+neo4j_tarball_name: neo4j-enterprise-2.2.3-unix.tar.gz
