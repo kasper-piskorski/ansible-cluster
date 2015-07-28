@@ -28,7 +28,7 @@ serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL  for a unix socket
 files = /etc/supervisor/conf.d/*.conf
 
 [program:zk-server]
-command={{zookeeper_server_dir}/bin/zkServer.sh start
+command={{zookeeper_server_dir}}/bin/zkServer.sh start
 #directory={{zookeeper_server_dir}}/bin
 user={{user_name}}
 autostart=true
