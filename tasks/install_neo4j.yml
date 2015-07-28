@@ -8,12 +8,12 @@
 - stat: path={{ cluster_home }}/{{ neo4j_tarball_name }}
   register: neo4j_tarball
 
-- name: Fetch storm package
+- name: Fetch neo4j package
   get_url: dest={{ cluster_home }}/{{ neo4j_tarball_name }} url={{neo4j_dropbox_link}}
   when: neo4j_tarball.stat.exists == False
 
-- name: Uncompress the storm tar
-  unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/{{neo4j_tarball_name}}"
+- name: Uncompress the neo4j tar
+  unarchive: copy=no  dest={{cluster_home}} src={{cluster_home}}/{{neo4j_tarball_name}}
 
 - name: Mv to server
   command: mv {{cluster_home}}/neo4j-enterprise-{{neo4j_version}} {{cluster_home}}/neo4j/server
