@@ -60,7 +60,7 @@ storm_tarball_name: "apache-storm-{{storm_version}}.tar.gz"
 ### Neo4j settings
 
 neo4j_dropbox_link: https://www.dropbox.com/s/s7m52y3win8jcf6/neo4j-enterprise-2.2.3-unix.tar.gz?dl=0
-neo4j_tarball_name: neo4j-enterprise-2.2.3-unix.tar.gz
+neo4j_tarball_name: "neo4j-enterprise-2.2.3-unix.tar.gz"
 
 neo4j_host: localhost
 neo4j_ha_initial_hosts: "{{neo4j_host}}:5001"
