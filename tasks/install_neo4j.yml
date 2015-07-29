@@ -5,16 +5,16 @@
     - "{{cluster_home}}/neo4j"
     - "{{log_home}}/neo4j"
 
-#- stat: path={{ cluster_home }}/{{ neo4j_tarball_name }}
-#  register: neo4j_tarball
+- stat: path={{ cluster_home }}/{{ neo4j_tarball_name }}
+  register: neo4j_tarball
 
-#- name: Fetch neo4j package
-#  get_url: dest={{ cluster_home }}/{{ neo4j_tarball_name }} url={{neo4j_dropbox_link}}
-#  when: neo4j_tarball.stat.exists == False
+- name: Fetch neo4j package
+  get_url: dest={{ cluster_home }}/{{ neo4j_tarball_name }} url={{neo4j_dropbox_link}}
+  when: neo4j_tarball.stat.exists == False
 
 - name: Uncompress the neo4j tar
-  #unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/{{neo4j_tarball_name}}" owner={{user_name}} group={{group_name}}
-  command: tar -xzf {{cluster_home}}/{{neo4j_tarball_name}}
+  unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/{{neo4j_tarball_name}}" owner={{user_name}} group={{group_name}}
+  #command: tar -xzf {{cluster_home}}/{{neo4j_tarball_name}}
 
 - name: Mv to server
   command: mv {{cluster_home}}/neo4j-enterprise-{{neo4j_version}} {{cluster_home}}/neo4j/server
