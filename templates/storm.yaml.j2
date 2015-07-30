@@ -49,6 +49,10 @@ ui.port: {{storm_ui_port}}
 {% endif %}
 
 ### drpc.* configs
+drpc.servers:
+{% for host in drpc_hosts %}
+    - "{{host}}"
+{% endfor %}
 {% if storm_drpc_extra_config.items is defined %}
 {% for key, value in storm_drpc_extra_config|dictsort %}
 {{key}}: {{value}}

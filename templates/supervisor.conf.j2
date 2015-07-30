@@ -28,16 +28,15 @@ serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL  for a unix socket
 files = /etc/supervisor/conf.d/*.conf
 
 [program:zk-server]
-command={{zookeeper_server_dir}}/bin/zkServer.sh start
-#directory={{zookeeper_server_dir}}/bin
+command={{zookeeper_server_dir}}/bin/zkServer.sh start-foreground
 user={{user_name}}
 autostart=true
 autorestart=true
-stdout_logfile={{log_home}}/zookeeper/zookeeper-out
+stdout_logfile={{log_home}}/zookeeper/log/zookeeper-out
 stdout_logfile_maxbytes=10MB
 stdout_logfile_backups=10
 stdout_events_enabled=true
-stderr_logfile={{log_home}}/zookeeper/zookeeper-err
+stderr_logfile={{log_home}}/zookeeper/log/zookeeper-err
 stderr_logfile_maxbytes=100MB
 stderr_logfile_backups=10
 stderr_events_enabled=true
@@ -49,11 +48,23 @@ programs={% for daemon in storm_daemons %}storm-{{daemon}} {% if not loop.last %
 {% for daemon in storm_daemons %}
 [program:storm-{{daemon}}]
 command={{cluster_home}}/storm/server/bin/storm {{daemon}}
-#directory={{cluster_home}}/storm/server/bin
 user={{user_name}}
 autostart=true
 autorestart=true
-stderr_logfile={{log_home}}/{{daemon}}-err
-stdout_logfile={{log_home}}/{{daemon}}-out
+stderr_logfile={{log_home}}/storm/{{daemon}}-err
+stdout_logfile={{log_home}}/storm/{{daemon}}-out
 
 {% endfor %}
+
+[program:neo4j-server]
+command={{cluster_home}}/neo4j/server/bin/neo4j console
+user={{user_name}}
+autostart=true
+autorestart=true
+startsecs=10
+startretries=999
+stopasgroup=true
+killasgroup=true
+stderr_logfile={{log_home}}/neo4j/neo4j-err
+stdout_logfile={{log_home}}/neo4j/neo4j-out
+

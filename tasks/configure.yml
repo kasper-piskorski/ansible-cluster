@@ -1,9 +1,12 @@
 ---
+- name: Ensure ownership
+  file: path={{item}} owner={{user_name}} group={{group_name}} recurse=yes
+  with_items:
+       - "{{cluster_home}}"
+       - "{{log_home}}"
+
 - name: Setup zoo.cfg
   template: dest="{{zookeeper_server_dir}}/conf/zoo.cfg" owner={{user_name}} group={{group_name}} src=zoo.cfg.j2
-
-- name: Configure supervisord
-  template: dest=/etc/supervisor/supervisor.conf owner={{user_name}} group={{group_name}} src=supervisor.conf.j2
 
 - name: Configure storm
   template: dest="{{storm_server_dir}}/conf/storm.yaml" owner={{user_name}} group={{group_name}} src=storm.yaml.j2
@@ -13,4 +16,7 @@
 
 - name: Configure neo4j-server.properties
   template: dest="{{neo4j_server_dir}}/conf/neo4j-server.properties" owner={{user_name}} group={{group_name}} src=neo4j-server.properties.j2
+
+- name: Configure supervisord
+  template: dest=/etc/supervisor.conf owner={{user_name}} group={{group_name}} src=supervisor.conf.j2
 

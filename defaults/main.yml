@@ -24,6 +24,7 @@ zk_tarball_name: "zookeeper-{{zk_version}}.tar.gz"
 storm_version: 0.9.5
 storm_daemons: [nimbus, supervisor]
 nimbus_host: 127.0.0.1
+drpc_hosts: 127.0.0.1
 
 nimbus_thrift_port: 6627
 storm_drpc_extra_config:
@@ -59,18 +60,20 @@ storm_tarball_name: "apache-storm-{{storm_version}}.tar.gz"
 
 ### Neo4j settings
 
-neo4j_dropbox_link: https://www.dropbox.com/s/s7m52y3win8jcf6/neo4j-enterprise-2.2.3-unix.tar.gz?dl=0
-neo4j_tarball_name: "neo4j-enterprise-2.2.3-unix.tar.gz"
+#neo4j_tarball_location: 
+#neo4j_dropbox_link: https://www.dropbox.com/s/s7m52y3win8jcf6/neo4j-enterprise-2.2.3-unix.tar.gz?dl=0
+neo4j_tarball_name: neo4j-enterprise-2.2.3-unix.tar.gz
+neo4j_version: 2.2.3
 
 neo4j_host: localhost
 neo4j_ha_initial_hosts: "{{neo4j_host}}:5001"
 
-neo4j_ha_server_id: 1
+neo4j_ha_server_id: 0
 neo4j_ha_server: "{{neo4j_host}}:6363"
 neo4j_online_backup_server: "{{neo4j_host}}:6366"
 neo4j_ha_cluster_server: "{{neo4j_host}}:5001"
 
-neo4j_dbms.pagecache.memory: 500m
+neo4j_dbms_pagecache_memory: 500m
 
 neo4j_ha_pull_interval: 5
 neo4j_ha_tx_push_factor: 1
