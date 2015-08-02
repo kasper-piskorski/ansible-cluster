@@ -1,0 +1,8 @@
+{% extends "neo4j-server.properties.template.j2" %}
+{% block webserver_port %}
+{{ neo4j_local_webserver_ports[0] }}
+{% endblock %}
+{% block webserver_https_port %}
+{{ neo4j_local_webserver_https_ports[0] }}
+{% endblock %}
+

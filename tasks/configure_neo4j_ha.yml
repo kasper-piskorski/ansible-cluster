@@ -1,0 +1,11 @@
+---
+- name: Configure neo4j.properties
+  template: dest="{{cluster_home}}/neo4j/{{item}}/conf/neo4j.properties" owner={{user_name}} group={{group_name}} src=neo4j.properties.ha.{{item}}.j2
+  with_items:
+     - "{{neo4j_local_ha_server_names}}"
+
+- name: Configure neo4j-server.properties
+  template: dest="{{cluster_home}}/neo4j/{{item}}/conf/neo4j-server.properties" owner={{user_name}} group={{group_name}} src=neo4j-server.properties.ha.{{item}}.j2
+  with_items:
+     - "{{neo4j_local_ha_server_names}}"
+

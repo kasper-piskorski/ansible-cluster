@@ -1,7 +1,11 @@
 ---
+- include: debug.yml
+- include: install_deps.yml
 - include: init.yml
 - include: install_zk.yml
 - include: install_storm.yml
 - include: install_neo4j.yml
+- include: install_haproxy.yml
+  when: neo4j_deploy_ha_mode == True
 - include: install_supervisor.yml
 - include: configure.yml

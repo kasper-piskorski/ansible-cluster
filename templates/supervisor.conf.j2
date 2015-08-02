@@ -1,61 +1,7 @@
-; supervisor config file
 
-[unix_http_server]
-file=/var/run/supervisor.sock   ; (the path to the socket file)
-chmod=0700                       ; sockef file mode (default 0700)
+{% include "supervisor-base.conf.j2" %}
 
-[supervisord]
-logfile={{log_home}}/supervisor/supervisord.log ; (main log file;default $CWD/supervisord.log)
-pidfile=/var/run/supervisord.pid ; (supervisord pidfile;default supervisord.pid)
-childlogdir={{log_home}}/supervisor            ; ('AUTO' child log dir, default $TEMP)
-
-; the below section must remain in the config file for RPC
-; (supervisorctl/web interface) to work, additional interfaces may be
-; added by defining them in separate rpcinterface: sections
-[rpcinterface:supervisor]
-supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface
-
-[supervisorctl]
-serverurl=unix:///var/run/supervisor.sock ; use a unix:// URL  for a unix socket
-
-; The [include] section can just contain the "files" setting.  This
-; setting can list multiple files (separated by whitespace or
-; newlines).  It can also contain wildcards.  The filenames are
-; interpreted as relative to this file.  Included files *cannot*
-; include files themselves.
-
-[include]
-files = /etc/supervisor/conf.d/*.conf
-
-[program:zk-server]
-command={{zookeeper_server_dir}}/bin/zkServer.sh start-foreground
-user={{user_name}}
-autostart=true
-autorestart=true
-stdout_logfile={{log_home}}/zookeeper/log/zookeeper-out
-stdout_logfile_maxbytes=10MB
-stdout_logfile_backups=10
-stdout_events_enabled=true
-stderr_logfile={{log_home}}/zookeeper/log/zookeeper-err
-stderr_logfile_maxbytes=100MB
-stderr_logfile_backups=10
-stderr_events_enabled=true
-
-[group:storm]
-programs={% for daemon in storm_daemons %}storm-{{daemon}} {% if not loop.last %}, {% endif %}{% endfor %}
-
-
-{% for daemon in storm_daemons %}
-[program:storm-{{daemon}}]
-command={{cluster_home}}/storm/server/bin/storm {{daemon}}
-user={{user_name}}
-autostart=true
-autorestart=true
-stderr_logfile={{log_home}}/storm/{{daemon}}-err
-stdout_logfile={{log_home}}/storm/{{daemon}}-out
-
-{% endfor %}
-
+{% if neo4j_deploy_ha_mode == False %}
 [program:neo4j-server]
 command={{cluster_home}}/neo4j/server/bin/neo4j console
 user={{user_name}}
@@ -67,4 +13,9 @@ stopasgroup=true
 killasgroup=true
 stderr_logfile={{log_home}}/neo4j/neo4j-err
 stdout_logfile={{log_home}}/neo4j/neo4j-out
+
+
+{% elif neo4j_deploy_ha_mode == True %}
+{% include "supervisor-ha.conf.j2" %}
+{% endif %}
 

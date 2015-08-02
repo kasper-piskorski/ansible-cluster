@@ -1,0 +1,51 @@
+global
+    #daemon
+    maxconn 256
+
+defaults
+    mode http
+    timeout connect 5000ms
+    timeout client 50000ms
+    timeout server 50000ms
+
+frontend write-in
+    bind *:{{haproxy_write_port}}
+    # condition: if the number of masters is less than 1 (no masters)
+    acl no_masters nbsrv(write-backend) lt 1
+    # then use ANY of the available neo4j instances
+    use_backend all-servers if no_masters
+    default_backend write-backend
+
+backend write-backend
+    option httpchk GET /db/manage/server/ha/master
+{% for server in neo4j_local_ha_server_ids %}
+    server s{{server}} {{neo4j_host}}:7474 maxconn 32 check
+{% endfor %}
+   
+
+frontend read-in
+    bind *:{{haproxy_read_port}}
+    default_backend read-backend
+
+backend read-backend
+    option httpchk GET /db/manage/server/ha/available
+{% for server in neo4j_local_ha_server_ids %}
+    server s{{server}} {{neo4j_host}}:7474 maxconn 32 check
+{% endfor %}
+
+
+backend all-servers
+    option httpchk GET /db/manage/server/ha/available
+{% for server in neo4j_local_ha_server_ids %}
+    server s{{server}} {{neo4j_host}}:7474 maxconn 32 check inter 5s
+{% endfor %}
+
+{% if haproxy_admin == True %}
+listen admin
+    bind {{haproxy_admin_host}}
+    stats enable
+    stats uri /admin         # Assigning a uri for admin console (default is /haproxy?stats)
+    stats auth admin:password     # Assining user name and password
+    stats refresh 30s          # Console page refresh period
+    stats admin if TRUE        # Enabling administration functionalities
+{% endif %}

@@ -23,6 +23,20 @@
 
 - name: Mv to server
   command: mv {{cluster_home}}/neo4j-enterprise-{{neo4j_version}} {{cluster_home}}/neo4j/server
+  when: neo4j_deploy_ha_mode == False
+
+#for HA mode
+- name: Cp server
+  #copy: recurse=yes dest={{cluster_home}}/neo4j/{{item}} src={{cluster_home}}/neo4j/server
+  command: cp -r {{cluster_home}}/neo4j-enterprise-{{neo4j_version}} {{cluster_home}}/neo4j/{{item}}
+  when: neo4j_deploy_ha_mode == True
+  with_items:
+     - "{{neo4j_local_ha_server_names}}"
+
+- name: Remove neo4j unpack dir
+  file: path="{{cluster_home}}/neo4j-enterprise-{{neo4j_version}}" state=absent
+  #command: rm -rf {{cluster_home}}/neo4j-enterprise-{{neo4j_version}}
+  when: neo4j_deploy_ha_mode == True
 
 - name: Set neo4j server dir
   set_fact: neo4j_server_dir="{{cluster_home}}/neo4j/server"

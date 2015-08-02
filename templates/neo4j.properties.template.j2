@@ -8,45 +8,45 @@
 ### HA settings
 # Unique server id for this Neo4j instance
 # can not be negative id and must be unique
-#ha.server_id = {{neo4j_ha_server_id}}
+ha.server_id = {% block server_id %}{% endblock%} 
 
 # IP and port for this instance to bind to for communicating data with the
 # other neo4j instances in the cluster.
-#ha.server = {{neo4j_ha_server}}
-#online_backup_server = {{neo4j_online_backup_server}}
+ha.server = {% block server %}{% endblock%}
+online_backup_server = {% block backup_server %}{% endblock%}
 
 # IP and port for this instance to bind to for communicating cluster information
 # with the other neo4j instances in the cluster.
-#ha.cluster_server = {{neo4j_ha_cluster_server}}
+ha.cluster_server = {% block cluster_server %}{% endblock%}
 
 # List of other known instances in this cluster
-#ha.initial_hosts = 
+ha.initial_hosts = {% for host in neo4j_ha_initial_hosts %} {{host}} {% if not loop.last %}, {% endif %}{% endfor %}
 
 # Reduce the default page cache memory allocation
-#dbms.pagecache.memory={{neo4j_dbms_pagecache_memory}}
+dbms.pagecache.memory={{neo4j_dbms_pagecache_memory}}
 
 # The interval at which slaves will pull updates from the master. Comment out
 # the option to disable periodic pulling of updates. Unit is seconds.
-#ha.pull_interval={{neo4j_ha_pull_interval}}
+ha.pull_interval={{neo4j_ha_pull_interval}}
 
 # Amount of slaves the master will try to push a transaction to upon commit
 # (default is 1). The master will optimistically continue and not fail the
 # transaction even if it fails to reach the push factor. Setting this to 0 will
 # increase write performance when writing through master but could potentially
 # lead to branched data (or loss of transaction) if the master goes down.
-#ha.tx_push_factor={{neo4j_ha_tx_push_factor}}
+ha.tx_push_factor={{neo4j_ha_tx_push_factor}}
 
 # Strategy the master will use when pushing data to slaves (if the push factor
 # is greater than 0). There are two options available "fixed" (default) or
 # "round_robin". Fixed will start by pushing to slaves ordered by server id
 # (highest first) improving performance since the slaves only have to cache up
 # one transaction at a time.
-#ha.tx_push_strategy={{neo4j_ha_tx_push_strategy}}
+ha.tx_push_strategy={{neo4j_ha_tx_push_strategy}}
 
 # Clustering timeouts
 # Default timeout.
-#ha.default_timeout={{neo4j_ha_default_timeout}}
+ha.default_timeout={{neo4j_ha_default_timeout}}
 
 # How often heartbeat messages should be sent. Defaults to ha.default_timeout.
-#ha.heartbeat_interval={{neo4j_ha_heartbeat_interval}}
+ha.heartbeat_interval={{neo4j_ha_heartbeat_interval}}
 

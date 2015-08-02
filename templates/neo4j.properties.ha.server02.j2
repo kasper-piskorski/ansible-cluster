@@ -1,0 +1,14 @@
+{% extends "neo4j.properties.template.j2" %}
+{% block server_id %}
+{{ neo4j_local_ha_server_ids[1] }}
+{% endblock %}
+{% block server %}
+{{ neo4j_local_ha_servers[1] }}
+{% endblock %}
+{% block backup_server %}
+{{ neo4j_local_ha_backup_servers[1] }}
+{% endblock %}
+{% block cluster_server %}
+{{ neo4j_local_ha_cluster_servers[1] }}
+{% endblock %}
+

@@ -1,0 +1,31 @@
+
+[group:neo4j]
+programs={% for server_name in neo4j_local_ha_server_names %}neo4j-{{server_name}} {% if not loop.last %}, {% endif %}{% endfor %}
+
+{% for server_name in neo4j_local_ha_server_names %}
+[program:neo4j-{{server_name}}]
+command={{cluster_home}}/neo4j/{{server_name}}/bin/neo4j console
+user={{user_name}}
+autostart=true
+autorestart=true
+startsecs=10
+startretries=999
+stopasgroup=true
+killasgroup=true
+stderr_logfile={{log_home}}/neo4j/neo4j-{{server_name}}-err
+stdout_logfile={{log_home}}/neo4j/neo4j-{{server_name}}-out
+
+{% endfor %}
+
+[program:haproxy]
+command=haproxy -f /etc/haproxy.cfg
+user={{user_name}}
+autostart=true
+autorestart=true
+startsecs=10
+startretries=999
+stopasgroup=true
+killasgroup=true
+stderr_logfile={{log_home}}/haproxy/haproxy-err
+stdout_logfile={{log_home}}/haproxy/haproxy-out
+

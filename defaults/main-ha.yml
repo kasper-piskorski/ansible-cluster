@@ -14,7 +14,7 @@ zk_version: 3.4.6
 
 zookeeper_maxClientCnxns: 60
 zookeeper_client_port: 2181
-zookeeper_hosts: localhost:2181
+zookeeper_hosts: 127.0.0.1:2181
 
 zk_mirror: http://mirrors.muzzy.org.uk/apache
 zk_tarball_name: "zookeeper-{{zk_version}}.tar.gz"
@@ -22,7 +22,7 @@ zk_tarball_name: "zookeeper-{{zk_version}}.tar.gz"
 ### STORM settings
 
 storm_version: 0.9.5
-storm_daemons: [nimbus, supervisor, ui, drpc]
+storm_daemons: [nimbus, supervisor]
 nimbus_host: 127.0.0.1
 drpc_hosts: 127.0.0.1
 
@@ -66,12 +66,17 @@ neo4j_tarball_name: neo4j-enterprise-2.2.3-unix.tar.gz
 neo4j_version: 2.2.3
 
 neo4j_host: localhost
-neo4j_deploy_ha_mode: no
+neo4j_deploy_ha_mode: yes
+neo4j_ha_initial_hosts: ["{{neo4j_host}}:5001", "{{neo4j_host}}:5002", "{{neo4j_host}}:5003"]
 
-neo4j_ha_server_id: 0
-neo4j_ha_server: "{{neo4j_host}}:6363"
-neo4j_online_backup_server: "{{neo4j_host}}:6366"
-neo4j_ha_cluster_server: "{{neo4j_host}}:5001"
+#LOCAL HA settings
+neo4j_local_ha_server_names: [server, server02, server03]
+neo4j_local_ha_server_ids: [0, 1, 2]
+neo4j_local_ha_servers: ["{{neo4j_host}}:6363", "{{neo4j_host}}:6364", "{{neo4j_host}}:6365" ]
+neo4j_local_ha_backup_servers: ["{{neo4j_host}}:6366", "{{neo4j_host}}:6367", "{{neo4j_host}}:6368"]
+neo4j_local_ha_cluster_servers: ["{{neo4j_host}}:5001", "{{neo4j_host}}:5002", "{{neo4j_host}}:5003"]
+neo4j_local_webserver_ports: [7474, 7475, 7476]
+neo4j_local_webserver_https_ports: [7484, 7485, 7486]
 
 neo4j_database_location: data/graph.db
 neo4j_webserver_port: 7474
