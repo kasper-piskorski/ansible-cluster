@@ -1,5 +1,5 @@
 # ansible-ontoit-cluster
-Ansible role for deployment of Ontoit cluster (ZK + Storm). Ansible needs to be installed to be able to run it.
+Ansible role for deployment of Ontoit cluster (ZK + Storm + Neo4j + HAProxy). Ansible needs to be installed to be able to run it.
 
 # Install Ansible
 
@@ -11,7 +11,7 @@ $ sudo apt-get install ansible
 ```
 
 # Adjust parameters
-Parameters are located in __defaults/main.yml__ file. The most important ones are: __zookeeper_hosts__, __storm_daemons__ and __nimbus_host__.
+Parameters are located in __defaults/main.yml__ file. For a local deployment it should be sufficient to copy the contents of __defaults/main-local.yml__ to __defaults/main.yml__.
 
 # Copy run_role.yml script 
 Adjust the scrpt according to needs, the basic stub takes the following form (deploying locally):
