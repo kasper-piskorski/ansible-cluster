@@ -14,7 +14,7 @@ $ sudo apt-get install ansible
 Parameters are located in __defaults/main.yml__ file. For a local deployment it should be sufficient to copy the contents of __defaults/main-local.yml__ to __defaults/main.yml__.
 
 # Copy run_role.yml script 
-Adjust the scrpt according to needs, the basic stub takes the following form (deploying locally):
+Copy the script to parent directory of ansible-ontoit-cluster clone. Adjust the script according to needs, the basic stub takes the following form (deploying locally):
 
 ```
 - hosts:  127.0.0.1
@@ -27,6 +27,7 @@ Adjust the scrpt according to needs, the basic stub takes the following form (de
 ```
 
 # Run role
+From parent directory of ansible-ontoit-cluster clone run:
 ```
 ansible-playbook run_role.yml -s -e "ROLE=ansible-ontoit-cluster" --ask-sudo-pass
 ```
