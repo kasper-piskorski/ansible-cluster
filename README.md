@@ -28,5 +28,5 @@ Adjust the scrpt according to needs, the basic stub takes the following form (de
 
 # Run role
 ```
-ansible-playbookrun_role.yml -s -e "ROLE=ansible-ontoit-cluster" --ask-sudo-pass
+ansible-playbook run_role.yml -s -e "ROLE=ansible-ontoit-cluster" --ask-sudo-pass
 ```
