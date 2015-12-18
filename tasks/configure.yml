@@ -7,21 +7,24 @@
 
 - name: Configure ZK
   template: dest="{{zookeeper_server_dir}}/conf/zoo.cfg" owner={{user_name}} group={{group_name}} src=zoo.cfg.j2
+  when: install_zk == True
 
 - name: Configure storm
   template: dest="{{storm_server_dir}}/conf/storm.yaml" owner={{user_name}} group={{group_name}} src=storm.yaml.j2
+  when: install_storm == True
 
 - include: configure_neo4j.yml
-  when: neo4j_deploy_ha_mode == False
+  when: (neo4j_deploy_ha_mode == False and install_neo4j == True)
 
 # Neo4j HA configure
 - include: configure_neo4j_ha.yml
-  when: neo4j_deploy_ha_mode == True
+  when: (neo4j_deploy_ha_mode == True and install_neo4j == True)
 
 - name: Configure HAProxy
   template: dest="/etc/haproxy.cfg" owner={{user_name}} group={{group_name}} src=haproxy.cfg.j2
-  when: neo4j_deploy_ha_mode == True  
+  when: (neo4j_deploy_ha_mode == True and install_neo4j == True)
 
 - name: Configure supervisord
   template: dest=/etc/supervisor.conf owner={{user_name}} group={{group_name}} src=supervisor.conf.j2
+  when: install_supervisor == True
 

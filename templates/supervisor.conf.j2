@@ -2,20 +2,9 @@
 {% include "supervisor-base.conf.j2" %}
 
 {% if neo4j_deploy_ha_mode == False %}
-[program:neo4j-server]
-command={{cluster_home}}/neo4j/server/bin/neo4j console
-user={{user_name}}
-autostart=true
-autorestart=true
-startsecs=10
-startretries=999
-stopasgroup=true
-killasgroup=true
-stderr_logfile={{log_home}}/neo4j/neo4j-err
-stdout_logfile={{log_home}}/neo4j/neo4j-out
-
+{% include "supervisor-neo4j.conf.j2" %}
 
 {% elif neo4j_deploy_ha_mode == True %}
-{% include "supervisor-ha.conf.j2" %}
+{% include "supervisor-neo4j-ha.conf.j2" %}
 {% endif %}
 

@@ -2,10 +2,19 @@
 #- include: debug.yml
 - include: install_deps.yml
 - include: init.yml
+
 - include: install_zk.yml
+  when: install_zk == True
 - include: install_storm.yml
+  when: install_storm == True
+
+- include: install_titan.yml
+  when: install_titan == True
 - include: install_neo4j.yml
+  when: install_neo4j == True
+
 - include: install_haproxy.yml
   when: neo4j_deploy_ha_mode == True
 - include: install_supervisor.yml
+  when: install_supervisor == True
 - include: configure.yml
