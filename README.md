@@ -1,5 +1,5 @@
 # ansible-ontoit-cluster
-Ansible role for deployment of Ontoit cluster (ZK + Storm + Neo4j + HAProxy) on Linux systems. Ansible needs to be installed to be able to run it.
+Ansible role for deployment of production cluster (ZK + Storm + {TitanDB, Neo4j} + HAProxy) on Linux systems. Ansible needs to be installed to be able to run it.
 
 # Install Ansible
 
