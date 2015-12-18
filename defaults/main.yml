@@ -76,7 +76,7 @@ storm_zookeeper_extra_config:
 
 titan_version: 1.0.0
 titan_hadoop_version: 1
-titan_mirror: http://s3.thinkaurelius.com/downloads/titan/
+titan_mirror: http://s3.thinkaurelius.com/downloads/titan
 titan_archive_name: titan-{{titan_version}}-hadoop{{titan_hadoop_version}}.zip
 
 
