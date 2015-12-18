@@ -3,6 +3,8 @@
 - include: install_deps.yml
 - include: init.yml
 
+#TODO check directories already exist
+
 - include: install_zk.yml
   when: install_zk == True
 - include: install_storm.yml

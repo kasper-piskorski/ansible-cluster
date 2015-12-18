@@ -1,6 +1,7 @@
 ---
 #### Global settings ####
 
+host_address: "{{ansible_default_ipv4.address}}"
 root_dir: /opt
 cluster_path: mindmaps/cluster
 cluster_home: "{{root_dir}}/{{cluster_path}}"
@@ -10,11 +11,11 @@ log_home : "/var/log/{{cluster_path}}"
 user_name: mindmaps
 group_name: mindmaps
 
-install_zk: no
-install_storm: no
+install_zk: yes
+install_storm: yes
 install_titan: yes
 install_neo4j: no
-install_supervisor: no
+install_supervisor: yes
 
 #### ZOOKEEPER settings ####
       
@@ -23,7 +24,7 @@ zk_mirror: http://mirrors.muzzy.org.uk/apache/
 zk_tarball_name: "zookeeper-{{zk_version}}.tar.gz"
 
 zookeeper_client_port: 2181
-zookeeper_hosts: localhost:2181
+zookeeper_hosts: "{{host_address}}:2181"
 
 zookeeper_maxClientCnxns: 60
 zookeeper_tick_time: 2000
@@ -40,8 +41,8 @@ storm_mirror: http://apache.mirrors.tds.net
 storm_tarball_name: "apache-storm-{{storm_version}}.tar.gz"
 
 storm_daemons: [nimbus, supervisor, ui, drpc]
-nimbus_host: 127.0.0.1
-drpc_hosts: 127.0.0.1
+nimbus_host: "{{host_address}}"
+drpc_hosts: "{{host_address}}"
 
 nimbus_thrift_port: 6627
 storm_drpc_extra_config:
@@ -79,6 +80,22 @@ titan_hadoop_version: 1
 titan_mirror: http://s3.thinkaurelius.com/downloads/titan
 titan_archive_name: titan-{{titan_version}}-hadoop{{titan_hadoop_version}}.zip
 
+#### Cassandra settings ####
+
+cassandra_host_address: "{{host_address}}"
+cassandra_listen_address: "{{cassandra_host_address}}"
+cassandra_rpc_address: "{{cassandra_host_address}}"
+cassandra_seeds: ["{{cassandra_host_address}}"]
+
+#### ElasticSearch settings ####
+
+elasticsearch_host_address: "{{host_address}}"
+
+#### Gremlin-server settings ####
+
+gremlin_host_address: "{{host_address}}"
+
+
 
 #### Neo4j settings ####
 
@@ -89,7 +106,7 @@ neo4j_deploy_ha_mode: no
 neo4j_version: 2.2.3
 neo4j_tarball_name: neo4j-enterprise-2.2.3-unix.tar.gz
 
-neo4j_host: localhost
+neo4j_host: "{{host_address}}"
 
 neo4j_ha_server_id: 0
 neo4j_ha_server: "{{neo4j_host}}:6363"
@@ -114,4 +131,4 @@ neo4j_ha_heartbeat_interval: 5s
 haproxy_write_port: 4000
 haproxy_read_port: 4001
 haproxy_admin: yes
-haproxy_admin_host: localhost:8088
+haproxy_admin_host: "{{host_address}}:8088"

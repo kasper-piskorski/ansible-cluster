@@ -2,8 +2,8 @@
 - name: Create log and local directories
   file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
   with_items:
-    - "{{cluster_home}}/storm"
-    - "{{cluster_home}}/storm/local"
+    #- "{{cluster_home}}/storm"
+    #- "{{cluster_home}}/storm/local"
     - "{{log_home}}/storm"
 
 - name: Fetch storm package
@@ -16,9 +16,9 @@
   file: path="{{cluster_home}}/{{storm_tarball_name}}" state=absent
 
 - name: Mv to server
-  command: mv {{cluster_home}}/apache-storm-{{storm_version}} {{cluster_home}}/storm/server
+  command: mv {{cluster_home}}/apache-storm-{{storm_version}} {{cluster_home}}/storm
 
 - name: Set Storm server dir
-  set_fact: storm_server_dir="{{cluster_home}}/storm/server"
+  set_fact: storm_server_dir="{{cluster_home}}/storm"
 
 

@@ -16,6 +16,9 @@
 - include: configure_neo4j.yml
   when: (neo4j_deploy_ha_mode == False and install_neo4j == True)
 
+- include: configure_titan.yml
+  when: install_titan == True
+
 # Neo4j HA configure
 - include: configure_neo4j_ha.yml
   when: (neo4j_deploy_ha_mode == True and install_neo4j == True)
