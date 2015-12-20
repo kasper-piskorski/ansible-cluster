@@ -25,6 +25,10 @@
   command: mv {{cluster_home}}/neo4j-enterprise-{{neo4j_version}} {{cluster_home}}/neo4j/server
   when: neo4j_deploy_ha_mode == False
 
+- name: Set neo4j server dir
+  set_fact: neo4j_server_dir="{{cluster_home}}/neo4j/server"
+  when: neo4j_deploy_ha_mode == False
+
 #for HA mode
 - name: Cp server
   #copy: recurse=yes dest={{cluster_home}}/neo4j/{{item}} src={{cluster_home}}/neo4j/server
@@ -38,6 +42,11 @@
   #command: rm -rf {{cluster_home}}/neo4j-enterprise-{{neo4j_version}}
   when: neo4j_deploy_ha_mode == True
 
-- name: Set neo4j server dir
-  set_fact: neo4j_server_dir="{{cluster_home}}/neo4j/server"
+#### Configuration ####
+- include: configure_neo4j.yml
+  when: (neo4j_deploy_ha_mode == False )
+
+# Neo4j HA configure
+- include: configure_neo4j_ha.yml
+  when: (neo4j_deploy_ha_mode == True )
 

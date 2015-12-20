@@ -3,7 +3,7 @@
   file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
   with_items:
     #- "{{cluster_home}}/titan"
-    - "{{log_home}}/titan"
+    - "{{log_home}}/titandb"
 
 - name: Fetch Titan package
   get_url: dest={{cluster_home}} url={{titan_mirror}}/{{titan_archive_name}} owner={{user_name}} group={{group_name}}
@@ -19,3 +19,5 @@
 
 - name: Set Titan server dir
   set_fact: titan_server_dir="{{cluster_home}}/titandb"
+
+- include: configure_titan.yml

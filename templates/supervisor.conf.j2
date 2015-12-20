@@ -1,8 +1,8 @@
 
 {% include "supervisor-base.conf.j2" %}
 
-{% if install_titan == True %}
-{% include "supervisor-titan.conf.j2" %}
+{% if install_cassandra == True %}
+{% include "supervisor-cassandra.conf.j2" %}
 {% endif %}
 
 {% if (neo4j_deploy_ha_mode == False) and (install_neo4j == True) %}

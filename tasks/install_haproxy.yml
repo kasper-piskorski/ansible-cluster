@@ -6,3 +6,7 @@
 
 - name: Install HAProxy
   apt: name=haproxy state=present
+
+- name: Configure HAProxy
+  template: dest="/etc/haproxy.cfg" owner={{user_name}} group={{group_name}} src=haproxy.cfg.j2
+  when: (neo4j_deploy_ha_mode == True and install_neo4j == True)

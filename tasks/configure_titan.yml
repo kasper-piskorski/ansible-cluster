@@ -1,14 +1,15 @@
 ---
+
 - name: Configure Cassandra properties
-  template: dest="{{cluster_home}}/titan/conf/cassandra/cassandra.yaml" owner={{user_name}} group={{group_name}} src=cassandra.yaml.j2
-  
+  template: dest="{{titan_server_dir}}/conf/cassandra/cassandra.yaml" owner={{user_name}} group={{group_name}} src=cassandra-titan.yaml.j2
+
 - name: Configure ElasticSearch properties
-  template: dest="{{cluster_home}}/titan/conf/es/elasticsearch.yml" owner={{user_name}} group={{group_name}} src=elasticsearch.yml.j2
+  template: dest="{{titan_server_dir}}/conf/es/elasticsearch.yml" owner={{user_name}} group={{group_name}} src=elasticsearch.yml.j2
 
-- name: Configure Gremlin-Server properties
-  template: dest="{{cluster_home}}/titan/conf/gremlin-server/gremlin-server.yaml" owner={{user_name}} group={{group_name}} src=gremlin-server.yaml.j2
+- name: Configure Titan-cassandra-es bundle properties
+  template: dest="{{titan_server_dir}}/conf/titan-cassandra-es.properties" owner={{user_name}} group={{group_name}} src=titan-cassandra-es.properties.j2
 
-- name: Configure Titan bundle properties
-  template: dest="{{cluster_home}}/titan/conf/titan-cassandra-es.properties" owner={{user_name}} group={{group_name}} src=titan-cassandra-es.properties.j2
+- name: Configure Titan-cassandra bundle properties
+  template: dest="{{titan_server_dir}}/conf/titan-cassandra.properties" owner={{user_name}} group={{group_name}} src=titan-cassandra.properties.j2
 
 

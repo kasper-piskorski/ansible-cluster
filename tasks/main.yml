@@ -1,5 +1,5 @@
 ---
-#- include: debug.yml
+
 - include: install_deps.yml
 - include: init.yml
 
@@ -8,16 +8,24 @@
 - include: install_storm.yml
   when: (install_storm == True and storm_path.stat.exists == False)
 
-- include: install_titan.yml
-  when: (install_titan == True and titan_path.stat.exists == False)
+
+- include: install_cassandra.yml
+  when: (install_cassandra == True and cassandra_path.stat.exists == False)
 - include: install_neo4j.yml
   when: (install_neo4j == True and neo4j_path.stat.exists == False)
 
+- include: install_titan.yml
+  when: (install_titan == True and titan_path.stat.exists == False)
+
+- name: Ensure ownership
+  file: path={{item}} owner={{user_name}} group={{group_name}} recurse=yes
+  with_items:
+       - "{{cluster_home}}"
+       - "{{log_home}}"
+
 - include: install_haproxy.yml
   when: install_haproxy == True
-  #when: neo4j_deploy_ha_mode == True
 
 - include: install_supervisor.yml
   when: install_supervisor == True
 
-- include: configure.yml
