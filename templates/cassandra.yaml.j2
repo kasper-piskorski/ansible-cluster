@@ -110,7 +110,7 @@ authorizer: AllowAllAuthorizer
 #
 # - CassandraRoleManager stores role data in the system_auth keyspace. Please
 #   increase system_auth keyspace replication factor if you use this role manager.
-role_manager: CassandraRoleManager
+#role_manager: CassandraRoleManager
 
 # Validity period for roles cache (fetching permissions can be an
 # expensive operation depending on the authorizer). Granted roles are cached for
@@ -118,7 +118,7 @@ role_manager: CassandraRoleManager
 # here, become eligible for (async) reload.
 # Defaults to 2000, set to 0 to disable.
 # Will be disabled automatically for AllowAllAuthenticator.
-roles_validity_in_ms: 2000
+#roles_validity_in_ms: 2000
 
 # Refresh interval for roles cache (if enabled).
 # After this interval, cache entries become eligible for refresh. Upon next

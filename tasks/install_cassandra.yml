@@ -25,7 +25,7 @@
   set_fact: cassandra_server_dir="{{cluster_home}}/cassandra"
 
 - name: Configure Cassandra properties
-  template: dest="{{cassandra_server_dir}}/conf/cassandra.yaml" owner={{user_name}} group={{group_name}} src=cassandra-titan.yaml.j2
+  template: dest="{{cassandra_server_dir}}/conf/cassandra.yaml" owner={{user_name}} group={{group_name}} src=cassandra.yaml.j2
 
 
 
