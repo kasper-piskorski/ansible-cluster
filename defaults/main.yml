@@ -16,6 +16,7 @@ install_storm: yes
 install_titan: yes
 install_neo4j: no
 install_supervisor: yes
+install_haproxy: no
 
 #### ZOOKEEPER settings ####
       
@@ -86,6 +87,9 @@ cassandra_host_address: "{{host_address}}"
 cassandra_listen_address: "{{cassandra_host_address}}"
 cassandra_rpc_address: "{{cassandra_host_address}}"
 cassandra_seeds: ["{{cassandra_host_address}}"]
+
+cassandra_data_dir: db/cassandra/data
+cassandra_commitlog_dir: db/cassandra/commitlog
 
 #### ElasticSearch settings ####
 

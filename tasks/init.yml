@@ -4,7 +4,7 @@
   group: name={{group_name}} system=yes
 
 - name: Setup user
-  user: name={{user_name}} system=yes group={{group_name}}
+  user: name={{user_name}} system=yes group={{group_name}} createhome=no
 
 - name: Create cluster home and log directory
   file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
@@ -12,3 +12,20 @@
        - "{{cluster_home}}"
        - "{{log_home}}"
 
+# Check paths
+
+- name: Check if path exists
+  stat: path={{cluster_home}/zookeeper
+  register: zookeeper_path
+
+- name: Check if path exists
+  stat: path={{cluster_home}/storm
+  register: storm_path
+
+- name: Check if path exists
+  stat: path={{cluster_home}/neo4j
+  register: neo4j_path
+
+- name: Check if path exists
+  stat: path={{cluster_home}/titandb
+  register: titan_path

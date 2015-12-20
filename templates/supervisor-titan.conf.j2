@@ -1,0 +1,19 @@
+
+[program:titandb]
+command={{log_home}}/titandb/bin/titan.sh start
+user={{user_name}}
+autostart=true
+autorestart=unexpected
+startsecs=10
+exitcodes=0
+startretries=999
+log_stdout=true
+log_stderr=true
+stdout_logfile={{log_home}}/titandb/titandb.log
+stdout_logfile_maxbytes=10MB
+stdout_logfile_backups=10
+stdout_events_enabled=true
+stderr_logfile={{log_home}}/titandb/titandb-error.log
+stderr_logfile_maxbytes=100MB
+stderr_logfile_backups=10
+stderr_events_enabled=true

@@ -15,7 +15,7 @@
   file: path="{{cluster_home}}/{{titan_archive_name}}" state=absent
 
 - name: Rename
-  command: mv {{cluster_home}}/titan-{{titan_version}}-hadoop{{titan_hadoop_version}} {{cluster_home}}/titan
+  command: mv {{cluster_home}}/titan-{{titan_version}}-hadoop{{titan_hadoop_version}} {{cluster_home}}/titandb
 
 - name: Set Titan server dir
-  set_fact: titan_server_dir="{{cluster_home}}/titan"
+  set_fact: titan_server_dir="{{cluster_home}}/titandb"

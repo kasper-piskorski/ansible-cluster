@@ -3,20 +3,21 @@
 - include: install_deps.yml
 - include: init.yml
 
-#TODO check directories already exist
-
 - include: install_zk.yml
-  when: install_zk == True
+  when: (install_zk == True and zookeeper_path.stat.exists == False)
 - include: install_storm.yml
-  when: install_storm == True
+  when: (install_storm == True and storm_path.stat.exists == False)
 
 - include: install_titan.yml
-  when: install_titan == True
+  when: (install_titan == True and titan_path.stat.exists == False)
 - include: install_neo4j.yml
-  when: install_neo4j == True
+  when: (install_neo4j == True and neo4j_path.stat.exists == False)
 
 - include: install_haproxy.yml
-  when: neo4j_deploy_ha_mode == True
+  when: install_haproxy == True
+  #when: neo4j_deploy_ha_mode == True
+
 - include: install_supervisor.yml
   when: install_supervisor == True
+
 - include: configure.yml
