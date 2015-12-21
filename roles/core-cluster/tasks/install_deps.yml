@@ -36,7 +36,7 @@
 #  sudo: yes
 
 - name: Install Oracle JDK 8
-  apt: update_cache=no name=oracle-java8-installer state=present
+  apt: update_cache=yes name=oracle-java8-installer state=present
 
 - name: Install ZeroMQ
   apt: name={{item}} state=present

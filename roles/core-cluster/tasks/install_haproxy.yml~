@@ -1,8 +1,0 @@
----
-- name: Create log and local directories
-  file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
-  with_items:
-    - "{{log_home}}/haproxy"
-
-- name: Install HAProxy
-  apt: name=haproxy state=present
