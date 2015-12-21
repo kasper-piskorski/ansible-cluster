@@ -1,0 +1,14 @@
+---
+#### Global settings ####
+
+host_address: "{{ansible_default_ipv4.address}}"
+root_dir: /opt
+cluster_path: mindmaps/cluster
+cluster_home: "{{root_dir}}/{{cluster_path}}"
+log_home : "/var/log/{{cluster_path}}"
+
+#user and group running the cluster
+user_name: mindmaps
+group_name: mindmaps
+
+database: cassandra

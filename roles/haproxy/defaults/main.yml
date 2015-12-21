@@ -1,0 +1,19 @@
+---
+#### Global settings ####
+
+host_address: "{{ansible_default_ipv4.address}}"
+root_dir: /opt
+cluster_path: mindmaps/cluster
+cluster_home: "{{root_dir}}/{{cluster_path}}"
+log_home : "/var/log/{{cluster_path}}"
+
+#user and group running the cluster
+user_name: mindmaps
+group_name: mindmaps
+
+#### HAProxy settings ####
+
+haproxy_write_port: 4000
+haproxy_read_port: 4001
+haproxy_admin: yes
+haproxy_admin_host: "{{host_address}}:8088"

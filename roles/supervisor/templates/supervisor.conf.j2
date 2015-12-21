@@ -1,13 +1,13 @@
 
 {% include "supervisor-base.conf.j2" %}
 
-{% if database == cassandra %}
+{% if database == "cassandra" %}
 {% include "supervisor-cassandra.conf.j2" %}
 
-{% elif database == neo4j %}
+{% elif database == "neo4j" %}
 {% include "supervisor-neo4j.conf.j2" %}
 
-{% elif database == neo4j-ha %}
+{% elif database == "neo4j-ha" %}
 {% include "supervisor-neo4j-ha.conf.j2" %}
 
 {% endif %}

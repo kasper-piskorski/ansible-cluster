@@ -5,8 +5,11 @@
     cluster_home: /opt/mindmaps/cluster
     log_home: /var/log/mindmaps/cluster
     storm_daemons: [nimbus, supervisor]
+    database: none
   remote_user: root
   sudo: yes
   
   roles:
-     - core-cluster
+     - common
+     - storm
+     - supervisor

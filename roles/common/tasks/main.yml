@@ -1,0 +1,4 @@
+---
+
+- include: install_deps.yml
+- include: init.yml

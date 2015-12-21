@@ -1,0 +1,29 @@
+---
+#### Global settings ####
+
+host_address: "{{ansible_default_ipv4.address}}"
+root_dir: /opt
+cluster_path: mindmaps/cluster
+cluster_home: "{{root_dir}}/{{cluster_path}}"
+log_home : "/var/log/{{cluster_path}}"
+
+#user and group running the cluster
+user_name: mindmaps
+group_name: mindmaps
+
+#### TITANDB settings ####
+
+titan_version: 1.0.0
+titan_hadoop_version: 1
+titan_mirror: http://s3.thinkaurelius.com/downloads/titan
+titan_archive_name: titan-{{titan_version}}-hadoop{{titan_hadoop_version}}.zip
+
+#### ElasticSearch settings ####
+
+elasticsearch_host_address: "{{host_address}}"
+
+#### Gremlin-server settings ####
+
+gremlin_host_address: "{{host_address}}"
+gremlin_port: 8182
+

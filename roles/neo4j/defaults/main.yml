@@ -1,0 +1,51 @@
+---
+#### Global settings ####
+
+host_address: "{{ansible_default_ipv4.address}}"
+root_dir: /opt
+cluster_path: mindmaps/cluster
+cluster_home: "{{root_dir}}/{{cluster_path}}"
+log_home : "/var/log/{{cluster_path}}"
+
+#user and group running the cluster
+user_name: mindmaps
+group_name: mindmaps
+
+
+#### Neo4j settings ####
+
+neo4j_deploy_ha_mode: no
+
+#neo4j_tarball_location: 
+#neo4j_dropbox_link: https://www.dropbox.com/s/s7m52y3win8jcf6/neo4j-enterprise-2.2.3-unix.tar.gz?dl=0
+neo4j_version: 2.2.3
+neo4j_tarball_name: neo4j-enterprise-2.2.3-unix.tar.gz
+
+neo4j_host: "{{host_address}}"
+neo4j_ha_initial_hosts: ["{{neo4j_host}}:5001", "{{neo4j_host}}:5002", "{{neo4j_host}}:5003"]
+
+#LOCAL HA settings
+neo4j_local_ha_server_names: [server, server02, server03]
+neo4j_local_ha_server_ids: [0, 1, 2]
+neo4j_local_ha_servers: ["{{neo4j_host}}:6363", "{{neo4j_host}}:6364", "{{neo4j_host}}:6365" ]
+neo4j_local_ha_backup_servers: ["{{neo4j_host}}:6366", "{{neo4j_host}}:6367", "{{neo4j_host}}:6368"]
+neo4j_local_ha_cluster_servers: ["{{neo4j_host}}:5001", "{{neo4j_host}}:5002", "{{neo4j_host}}:5003"]
+neo4j_local_webserver_ports: [7474, 7475, 7476]
+neo4j_local_webserver_https_ports: [7484, 7485, 7486]
+
+neo4j_ha_server_id: 0
+neo4j_ha_server: "{{neo4j_host}}:6363"
+neo4j_online_backup_server: "{{neo4j_host}}:6366"
+neo4j_ha_cluster_server: "{{neo4j_host}}:5001"
+
+neo4j_database_location: data/graph.db
+neo4j_webserver_port: 7474
+neo4j_webserver_https_port: 7484
+
+neo4j_dbms_pagecache_memory: 500m
+
+neo4j_ha_pull_interval: 5
+neo4j_ha_tx_push_factor: 1
+neo4j_ha_tx_push_strategy: fixed
+neo4j_ha_default_timeout: 5s
+neo4j_ha_heartbeat_interval: 5s

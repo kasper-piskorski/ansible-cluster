@@ -9,7 +9,6 @@
 
 - name: Configure supervisord
   template: dest={{item}} owner={{user_name}} group={{group_name}} src=supervisor.conf.j2
-  when: install_supervisor == True
   with_items:
        - /etc/supervisord.conf
        - /etc/supervisor/supervisord.conf

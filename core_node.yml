@@ -5,8 +5,12 @@
     cluster_home: /opt/mindmaps/cluster
     log_home: /var/log/mindmaps/cluster
     storm_daemons: [supervisor]
+    database: cassandra
   remote_user: root
   sudo: yes
   
   roles:
-     - core-cluster
+     - common
+     - storm
+     - cassandra
+     - supervisor
