@@ -11,6 +11,25 @@ log_home : "/var/log/{{cluster_path}}"
 user_name: mindmaps
 group_name: mindmaps
 
+#### Cassandra settings ####
+
+cassandra_version: 3.1
+cassandra_mirror: "http://www.eu.apache.org/dist/cassandra/{{cassandra_version}}"
+cassandra_tarball_name: apache-cassandra-3.1-bin.tar.gz
+
+cassandra_host_address: "{{host_address}}"
+cassandra_listen_address: "{{cassandra_host_address}}"
+cassandra_rpc_address: "{{cassandra_host_address}}"
+
+cassandra_num_tokens: 256
+
+#needs to be filled in for discoverability
+cassandra_seeds: ["{{cassandra_host_address}}"]
+
+cassandra_data_dir: /var/lib/cassandra/data
+cassandra_commitlog_dir: /var/lib/cassandra/commitlog
+cassandra_saved_caches_dir: /var/lib/cassandra/saved_caches
+
 #### TITANDB settings ####
 
 titan_version: 1.0.0
