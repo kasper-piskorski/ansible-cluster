@@ -438,12 +438,12 @@ trickle_fsync_interval_in_kb: 10240
 
 # TCP port, for commands and data
 # For security reasons, you should not expose this port to the internet.  Firewall it if needed.
-storage_port: 7000
+storage_port: {{cassandra_storage_port}}
 
 # SSL port, for encrypted communication.  Unused unless enabled in
 # encryption_options
 # For security reasons, you should not expose this port to the internet.  Firewall it if needed.
-ssl_storage_port: 7001
+ssl_storage_port: {{cassandra_ssl_storage_port}}
 
 # Address or interface to bind to and tell other Cassandra nodes to connect to.
 # You _must_ change this if you want multiple nodes to be able to communicate!
@@ -480,7 +480,7 @@ listen_address: {{cassandra_listen_address}}
 start_native_transport: true
 # port for the CQL native transport to listen for clients on
 # For security reasons, you should not expose this port to the internet.  Firewall it if needed.
-native_transport_port: 9042
+native_transport_port: {{cassandra_native_transport_port}}
 # Enabling native transport encryption in client_encryption_options allows you to either use
 # encryption for the standard port or to use a dedicated, additional port along with the unencrypted
 # standard native_transport_port.
@@ -508,7 +508,7 @@ native_transport_port: 9042
 # native_transport_max_concurrent_connections_per_ip: -1
 
 # Whether to start the thrift rpc server.
-start_rpc: false
+start_rpc: true
 
 # The address or interface to bind the Thrift RPC service and native transport
 # server to.
@@ -533,7 +533,7 @@ rpc_address: {{cassandra_rpc_address}}
 # rpc_interface_prefer_ipv6: false
 
 # port for Thrift to listen for clients on
-rpc_port: 9160
+rpc_port: {{cassandra_rpc_port}}
 
 # RPC address to broadcast to drivers and other Cassandra nodes. This cannot
 # be set to 0.0.0.0. If left blank, this will be set to the value of
