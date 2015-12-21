@@ -11,6 +11,8 @@
        - python-software-properties
        - libtool
        - uuid-dev
+       - tar
+       - gzip
 
 # Oracle JDK 8
 #- name: Add repo for java 8
@@ -26,14 +28,6 @@
 
 - name: Accept licence
   debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
-
-#- name: Set licence selected
-#  shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-#  sudo: yes
-
-#- name: Set licence seen
-#  shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
-#  sudo: yes
 
 - name: Install Oracle JDK 8
   apt: update_cache=yes name=oracle-java8-installer state=present

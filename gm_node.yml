@@ -4,7 +4,7 @@
   vars:
     cluster_home: /opt/mindmaps/cluster
     log_home: /var/log/mindmaps/cluster
-    storm_daemons: [nimbus, supervisor]
+    storm_daemons: [nimbus]
     database: none
   remote_user: root
   sudo: yes
