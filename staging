@@ -1,0 +1,6 @@
+[core-servers]
+127.0.0.1
+
+[graph-servers]
+127.0.0.1
+
