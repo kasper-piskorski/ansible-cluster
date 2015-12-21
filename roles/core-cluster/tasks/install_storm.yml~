@@ -1,0 +1,25 @@
+---
+- name: Create Storm log and local directories
+  file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
+  with_items:
+    #- "{{cluster_home}}/storm"
+    #- "{{cluster_home}}/storm/local"
+    - "{{log_home}}/storm"
+
+- name: Fetch Storm package
+  get_url: dest={{ cluster_home }}/{{ storm_tarball_name }} url={{storm_mirror}}/storm/apache-storm-{{storm_version}}/{{ storm_tarball_name }}
+
+- name: Uncompress the Storm tar
+  unarchive: copy=no  dest={{cluster_home}} src={{cluster_home}}/{{storm_tarball_name}} owner={{user_name}} group={{group_name}}
+
+- name: Remove Storm tar
+  file: path="{{cluster_home}}/{{storm_tarball_name}}" state=absent
+
+- name: Mv to server
+  command: mv {{cluster_home}}/apache-storm-{{storm_version}} {{cluster_home}}/storm
+
+- name: Configure Storm
+  template: dest="{{storm_server_dir}}/conf/storm.yaml" owner={{user_name}} group={{group_name}} src=storm.yaml.j2
+  #when: (install_storm == True and storm_path.stat.exists == True)
+
+

@@ -1,0 +1,15 @@
+
+{% include "supervisor-base.conf.j2" %}
+
+{% if database == cassandra %}
+{% include "supervisor-cassandra.conf.j2" %}
+{% endif %}
+
+{% if (neo4j_deploy_ha_mode == False) and (install_neo4j == True) %}
+{% include "supervisor-neo4j.conf.j2" %}
+
+{% elif (neo4j_deploy_ha_mode == True) and (install_neo4j == True) %}
+{% include "supervisor-neo4j-ha.conf.j2" %}
+
+{% endif %}
+

@@ -79,6 +79,23 @@ titan_hadoop_version: 1
 titan_mirror: http://s3.thinkaurelius.com/downloads/titan
 titan_archive_name: titan-{{titan_version}}-hadoop{{titan_hadoop_version}}.zip
 
+titan_state: started
+titan_enable: yes
+
+titan_storage_backend: local
+titan_storage_hostnames: 
+
+titan_db_cache: true
+titan_db_cache_clean_wait: 20
+titan_db_cache_time: 180000
+titan_db_cache_size: 0.25
+
+titan_search_backend: elasticsearch
+titan_search_hostnames: 127.0.0.1
+
+titan_search_elasticsearch_client_only: true
+titan_search_elasticsearch_interface: TRANSPORT_CLIENT
+
 
 #### Neo4j settings ####
 

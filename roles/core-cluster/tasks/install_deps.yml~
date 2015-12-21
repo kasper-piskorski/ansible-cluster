@@ -1,0 +1,46 @@
+---
+# Sort out dependencies
+- name: Install packages
+  apt: name={{item}} state=present
+  with_items:
+       - make
+       - autotools-dev
+       - autoconf
+       - git
+       - software-properties-common
+       - python-software-properties
+       - libtool
+       - uuid-dev
+
+# Oracle JDK 8
+#- name: Add repo for java 8
+#  apt_repository: repo='ppa:webupd8team/java' state=present
+
+- set_fact: java_repo_file="/etc/apt/sources.list.d/webupd8team-java.list"
+- file: path={{java_repo_file}} state=touch
+- lineinfile: dest={{java_repo_file}} line="deb http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main"
+- lineinfile: dest={{java_repo_file}} line="deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu trusty main"
+
+- name: Add repository key
+  apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=EEA14886 state=present
+
+- name: Accept licence
+  debconf: name='oracle-java8-installer' question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+
+#- name: Set licence selected
+#  shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+#  sudo: yes
+
+#- name: Set licence seen
+#  shell: /bin/echo debconf shared/accepted-oracle-license-v1-1 seen true | /usr/bin/debconf-set-selections
+#  sudo: yes
+
+- name: Install Oracle JDK 8
+  apt: update_cache=yes name=oracle-java8-installer state=present
+
+- name: Install ZeroMQ
+  apt: name={{item}} state=present
+  with_items:
+       - build-essential
+       - libzmq3-dev
+

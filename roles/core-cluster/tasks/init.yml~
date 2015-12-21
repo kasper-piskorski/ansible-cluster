@@ -1,0 +1,41 @@
+---
+# Setup directory structure
+- name: Setup group
+  group: name={{group_name}} system=yes
+
+- name: Setup user
+  user: name={{user_name}} system=yes group={{group_name}} createhome=no
+
+- name: Create cluster home and log directory
+  file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
+  with_items:
+       - "{{cluster_home}}"
+       - "{{log_home}}"
+
+
+- name: Check if ZK paths exists
+  stat: path="{{cluster_home}}/zookeeper"  
+  register: zookeeper_path
+
+- name: Check if Storm path exists
+  stat: path={{cluster_home}}/storm
+  register: storm_path
+
+- name: Check if Neo4j path exists
+  stat: path={{cluster_home}}/neo4j
+  register: neo4j_path
+
+- name: Check if Cassandra path exists
+  stat: path={{cluster_home}}/cassandra
+  register: cassandra_path
+
+- name: Check if Titan path exists
+  stat: path={{cluster_home}}/titandb
+  register: titan_path
+
+#Debug
+#- debug: msg="zookeeper path  {{zookeeper_path.stat.exists}}"
+#- debug: msg="storm path  {{storm_path.stat.exists}}"
+#- debug: msg="neo4j path  {{neo4j_path.stat.exists}}"
+#- debug: msg="titandb path  {{titan_path.stat.exists}}"
+

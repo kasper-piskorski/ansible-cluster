@@ -1,0 +1,161 @@
+---
+#### Global settings ####
+
+host_address: "{{ansible_default_ipv4.address}}"
+root_dir: /opt
+cluster_path: mindmaps/cluster
+cluster_home: "{{root_dir}}/{{cluster_path}}"
+log_home : "/var/log/{{cluster_path}}"
+
+#user and group running the cluster
+user_name: mindmaps
+group_name: mindmaps
+
+install_zk: yes
+install_storm: yes
+install_cassandra: yes
+install_neo4j: no
+install_titan: yes
+install_supervisor: yes
+install_haproxy: no
+
+database: cassandra
+
+#### ZOOKEEPER settings ####
+      
+zk_version: 3.4.7
+zk_mirror: "http://mirrors.muzzy.org.uk/apache/zookeeper/zookeeper-{{zk_version}}"
+zk_tarball_name: "zookeeper-{{zk_version}}.tar.gz"
+
+zookeeper_client_port: 2181
+zookeeper_hosts: "{{host_address}}:2181"
+
+zookeeper_maxClientCnxns: 60
+zookeeper_tick_time: 2000
+zookeeper_init_limit: 5
+zookeeper_sync_limit: 2
+
+zookeeper_purge_interval: 24
+zookeeper_snap_retain_count: 3
+
+#### STORM settings ####
+
+storm_version: 0.9.5
+storm_mirror: http://apache.mirrors.tds.net
+storm_tarball_name: "apache-storm-{{storm_version}}.tar.gz"
+
+##include as role variable
+storm_daemons: [nimbus, supervisor, ui, drpc]
+nimbus_host: "{{host_address}}"
+drpc_hosts: "{{host_address}}"
+
+nimbus_thrift_port: 6627
+storm_drpc_extra_config:
+storm_local_dir: "{{cluster_home}}/storm/local"
+storm_java_library_path: "/usr/local/lib:/opt/local/lib:/usr/lib"
+storm_zookeeper_port: "{{zookeeper_client_port}}"
+storm_nimbus_extra_config:
+    nimbus.childopts: "-Xmx1024m "
+storm_supervisor_extra_config:
+    supervisor.childopts: "-Xmx1024m "
+storm_topology_extra_config:
+    topology.acker.executors: 1
+    topology.debug: false
+storm_transactional_extra_config:
+    transactional.zookeeper.port: "{{ storm_zookeeper_port }}"
+    transactional.zookeeper.root: "/storm-transactional"
+
+storm_ui_port: 8088
+storm_ui_extra_config:
+    ui.childopts: "-Xmx768m"
+storm_worker_extra_config:
+    worker.childopts: "-Xmx1024m -XX:+UseConcMarkSweepGC -Dcom.sun.management.jmxremote"
+storm_worker_ports: [6701, 6702, 6703, 6704]
+storm_zookeeper_extra_config:
+    storm.zookeeper.port:  "{{ storm_zookeeper_port }}"
+    storm.zookeeper.retry.interval: 5000
+    storm.zookeeper.retry.times: 60
+    storm.zookeeper.root: "/storm"
+    storm.zookeeper.session.timeout: 3000
+
+
+#### Cassandra settings ####
+
+cassandra_version: 3.1
+cassandra_mirror: "http://www.eu.apache.org/dist/cassandra/{{cassandra_version}}"
+cassandra_tarball_name: apache-cassandra-3.1-bin.tar.gz
+
+cassandra_host_address: "{{host_address}}"
+cassandra_listen_address: "{{cassandra_host_address}}"
+cassandra_rpc_address: "{{cassandra_host_address}}"
+
+cassandra_num_tokens: 4
+
+#needs to be filled in for discoverability
+cassandra_seeds: ["{{cassandra_host_address}}"]
+
+cassandra_data_dir: /var/lib/cassandra/data
+cassandra_commitlog_dir: /var/lib/cassandra/commitlog
+cassandra_saved_caches_dir: /var/lib/cassandra/saved_caches
+
+#### TITANDB settings ####
+
+titan_version: 1.0.0
+titan_hadoop_version: 1
+titan_mirror: http://s3.thinkaurelius.com/downloads/titan
+titan_archive_name: titan-{{titan_version}}-hadoop{{titan_hadoop_version}}.zip
+
+#### ElasticSearch settings ####
+
+elasticsearch_host_address: "{{host_address}}"
+
+#### Gremlin-server settings ####
+
+gremlin_host_address: "{{host_address}}"
+gremlin_port: 8182
+
+#### Neo4j settings ####
+
+neo4j_deploy_ha_mode: no
+
+#neo4j_tarball_location: 
+#neo4j_dropbox_link: https://www.dropbox.com/s/s7m52y3win8jcf6/neo4j-enterprise-2.2.3-unix.tar.gz?dl=0
+neo4j_version: 2.2.3
+neo4j_tarball_name: neo4j-enterprise-2.2.3-unix.tar.gz
+
+neo4j_host: "{{host_address}}"
+neo4j_ha_initial_hosts: ["{{neo4j_host}}:5001", "{{neo4j_host}}:5002", "{{neo4j_host}}:5003"]
+
+#LOCAL HA settings
+neo4j_local_ha_server_names: [server, server02, server03]
+neo4j_local_ha_server_ids: [0, 1, 2]
+neo4j_local_ha_servers: ["{{neo4j_host}}:6363", "{{neo4j_host}}:6364", "{{neo4j_host}}:6365" ]
+neo4j_local_ha_backup_servers: ["{{neo4j_host}}:6366", "{{neo4j_host}}:6367", "{{neo4j_host}}:6368"]
+neo4j_local_ha_cluster_servers: ["{{neo4j_host}}:5001", "{{neo4j_host}}:5002", "{{neo4j_host}}:5003"]
+neo4j_local_webserver_ports: [7474, 7475, 7476]
+neo4j_local_webserver_https_ports: [7484, 7485, 7486]
+
+neo4j_ha_server_id: 0
+neo4j_ha_server: "{{neo4j_host}}:6363"
+neo4j_online_backup_server: "{{neo4j_host}}:6366"
+neo4j_ha_cluster_server: "{{neo4j_host}}:5001"
+
+neo4j_database_location: data/graph.db
+neo4j_webserver_port: 7474
+neo4j_webserver_https_port: 7484
+
+neo4j_dbms_pagecache_memory: 500m
+
+neo4j_ha_pull_interval: 5
+neo4j_ha_tx_push_factor: 1
+neo4j_ha_tx_push_strategy: fixed
+neo4j_ha_default_timeout: 5s
+neo4j_ha_heartbeat_interval: 5s
+
+
+#### HAProxy settings ####
+
+haproxy_write_port: 4000
+haproxy_read_port: 4001
+haproxy_admin: yes
+haproxy_admin_host: "{{host_address}}:8088"

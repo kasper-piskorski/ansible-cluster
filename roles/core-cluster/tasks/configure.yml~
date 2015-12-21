@@ -1,0 +1,11 @@
+---
+- name: Ensure ownership
+  file: path={{item}} owner={{user_name}} group={{group_name}} recurse=yes
+  with_items:
+       - "{{cluster_home}}"
+       - "{{log_home}}"
+
+
+
+
+

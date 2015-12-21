@@ -1,0 +1,23 @@
+---
+- name: Create Titan log and local directories
+  file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
+  with_items:
+    #- "{{cluster_home}}/titan"
+    - "{{log_home}}/titandb"
+
+- name: Fetch Titan package
+  get_url: dest={{cluster_home}} url={{titan_mirror}}/{{titan_archive_name}} owner={{user_name}} group={{group_name}}
+  
+- name: Uncompress Titan package
+  unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/{{titan_archive_name}}" owner={{user_name}} group={{group_name}}
+
+- name: Remove archive
+  file: path="{{cluster_home}}/{{titan_archive_name}}" state=absent
+
+- name: Rename
+  command: mv {{cluster_home}}/titan-{{titan_version}}-hadoop{{titan_hadoop_version}} {{cluster_home}}/titandb
+
+- name: Set Titan server dir
+  set_fact: titan_server_dir="{{cluster_home}}/titandb"
+
+- include: configure_titan.yml
