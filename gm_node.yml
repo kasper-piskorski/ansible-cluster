@@ -1,12 +1,12 @@
 ---
 - name: Core cluster deployment on GM node
-  hosts: 127.0.0.1
+  hosts: graph-servers
   vars:
     cluster_home: /opt/mindmaps/cluster
     log_home: /var/log/mindmaps/cluster
     storm_daemons: [nimbus]
     database: none
-  remote_user: root
+  remote_user: kasper
   sudo: yes
   
   roles:

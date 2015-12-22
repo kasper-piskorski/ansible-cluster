@@ -1,6 +1,6 @@
 ---
 - name: Core cluster deployment on core node
-  hosts: 127.0.0.1
+  hosts: core-servers
   vars:
     cluster_home: /opt/mindmaps/cluster
     log_home: /var/log/mindmaps/cluster
@@ -11,7 +11,7 @@
     cassandra_data_dir: /var/lib/cassandra/data
     cassandra_commitlog_dir: /var/lib/cassandra/commitlog
     cassandra_saved_caches_dir: /var/lib/cassandra/saved_caches
-  remote_user: root
+  remote_user: kasper
   sudo: yes
   
   roles:
