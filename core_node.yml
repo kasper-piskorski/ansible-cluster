@@ -3,17 +3,22 @@
   hosts: core-servers
   vars:
     cluster_home: /opt/mindmaps/cluster
+    resource_home: /opt/mindmaps/resources
     log_home: /var/log/mindmaps/cluster
     storm_daemons: [supervisor]
     database: cassandra
     cassandra_num_tokens: 256
-    cassandra_seeds: [ 10.10.10.100 ]
+    cassandra_hosts: [ 10.10.10.100, 10.10.10.102, 10.10.10.103]
+    cassandra_seeds: [ 10.10.10.100, 10.10.10.102 ]
+    cassandra_read_consistency: ONE
+    cassandra_write_consistency: ALL
+    cassandra_replication_factor: "{{cassandra_hosts | length }}"
     cassandra_data_dir: /var/lib/cassandra/data
     cassandra_commitlog_dir: /var/lib/cassandra/commitlog
     cassandra_saved_caches_dir: /var/lib/cassandra/saved_caches
   remote_user: kasper
   sudo: yes
-  
+
   roles:
      - common
      - storm

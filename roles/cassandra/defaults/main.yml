@@ -5,6 +5,7 @@ host_address: "{{ansible_default_ipv4.address}}"
 root_dir: /opt
 cluster_path: mindmaps/cluster
 cluster_home: "{{root_dir}}/{{cluster_path}}"
+resource_home: /opt/mindmaps/resources
 log_home : "/var/log/{{cluster_path}}"
 
 #user and group running the cluster
@@ -23,8 +24,10 @@ cassandra_rpc_address: "{{cassandra_host_address}}"
 
 cassandra_num_tokens: 256
 
-#needs to be filled in for discoverability
+cassandra_hosts: ["{{cassandra_host_address}}"]
 cassandra_seeds: ["{{cassandra_host_address}}"]
+cassandra_read_consistency: ONE
+cassandra_write_consistency: ALL
 
 cassandra_data_dir: /var/lib/cassandra/data
 cassandra_commitlog_dir: /var/lib/cassandra/commitlog

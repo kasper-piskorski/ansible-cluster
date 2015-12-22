@@ -25,6 +25,9 @@
 - name: Configure Cassandra properties
   template: dest="{{cassandra_server_dir}}/conf/cassandra.yaml" owner={{user_name}} group={{group_name}} src=cassandra.yaml.j2
 
+- name: Configure Titan-Cassandra properties
+  template: dest="{{resource_home}}/conf/titan-cassandra.properties" owner={{user_name}} group={{group_name}} src=titan-cassandra.properties.j2
+
 
 
 
