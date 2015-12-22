@@ -7,7 +7,7 @@
     storm_daemons: [supervisor]
     database: cassandra
     cassandra_num_tokens: 256
-    #cassandra_seeds: [ 127.0.0.1 ]
+    cassandra_seeds: [ 10.10.10.100 ]
     cassandra_data_dir: /var/lib/cassandra/data
     cassandra_commitlog_dir: /var/lib/cassandra/commitlog
     cassandra_saved_caches_dir: /var/lib/cassandra/saved_caches
