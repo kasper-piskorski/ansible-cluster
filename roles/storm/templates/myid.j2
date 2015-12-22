@@ -1,0 +1,6 @@
+{%- for host in zookeeper_hosts -%}
+    {%- if host == host_address -%}
+	{{ loop.index }}
+    {%- endif -%}
+{%- endfor -%}
+

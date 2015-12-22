@@ -2,8 +2,6 @@
 - name: Create Storm log and local directories
   file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
   with_items:
-    #- "{{cluster_home}}/storm"
-    #- "{{cluster_home}}/storm/local"
     - "{{log_home}}/storm"
 
 - name: Fetch Storm package

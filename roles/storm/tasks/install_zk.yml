@@ -23,3 +23,6 @@
 - name: Configure ZK
   template: dest="{{zookeeper_server_dir}}/conf/zoo.cfg" owner={{user_name}} group={{group_name}} src=zoo.cfg.j2
 
+- name: Add myid file
+  template: dest="{{zookeeper_server_dir}}/myid" owner={{user_name}} group={{group_name}} src=myid.j2
+
