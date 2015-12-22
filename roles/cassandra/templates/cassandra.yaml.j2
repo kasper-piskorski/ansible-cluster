@@ -276,7 +276,7 @@ counter_cache_save_period: 7200
 
 # saved caches
 # If not set, the default directory is $CASSANDRA_HOME/data/saved_caches.
-# saved_caches_directory: /var/lib/cassandra/saved_caches
+saved_caches_directory: {{cassandra_saved_caches_dir}}
 
 # commitlog_sync may be either "periodic" or "batch." 
 # 
@@ -332,7 +332,7 @@ seed_provider:
       parameters:
           # seeds is actually a comma-delimited list of addresses.
           # Ex: "<ip1>,<ip2>,<ip3>"
-          - seeds: {% for seed in cassandra_seeds %}"{{seed}}{% if not loop.last %},{% endif %}{% endfor %}"
+          - seeds: "{% for seed in cassandra_seeds %}{{seed}}{% if not loop.last %},{% endif %}{% endfor %}"
 
 # For workloads with more data than can fit in memory, Cassandra's
 # bottleneck will be reads that need to fetch data from
