@@ -39,8 +39,6 @@ storm_tarball_name: "apache-storm-{{storm_version}}.tar.gz"
 
 ##include as role variable
 storm_daemons: [nimbus, supervisor, ui, drpc]
-nimbus_host: "{{host_address}}"
-drpc_hosts: "{{host_address}}"
 
 nimbus_thrift_port: 6627
 storm_drpc_extra_config:

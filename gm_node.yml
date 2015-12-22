@@ -8,6 +8,8 @@
     storm_daemons: [nimbus, drpc, ui]
     database: cassandra
     zookeeper_hosts: [ 10.10.10.100, 10.10.10.102, 10.10.10.103]
+    storm_nimbus_seeds: [ 10.10.10.102 ]
+    storm_drpc_hosts: [ 10.10.10.102 ]
     cassandra_num_tokens: 256
     cassandra_hosts: [ 10.10.10.100, 10.10.10.102, 10.10.10.103]
     cassandra_seeds: [ 10.10.10.100, 10.10.10.102 ]
