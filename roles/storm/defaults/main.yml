@@ -18,7 +18,6 @@ zk_mirror: "http://mirrors.muzzy.org.uk/apache/zookeeper/zookeeper-{{zk_version}
 zk_tarball_name: "zookeeper-{{zk_version}}.tar.gz"
 
 zookeeper_client_port: 2181
-zookeeper_hosts: "{{host_address}}:{{zookeeper_client_port}}"
 
 zookeeper_dataDir: "{{cluster_home}}/zookeeper"
 #zookeeper_dataLogDir:
@@ -33,16 +32,12 @@ zookeeper_snap_retain_count: 3
 
 #### STORM settings ####
 
-storm_version: 0.9.5
-storm_mirror: http://apache.mirrors.tds.net
+storm_version: 0.10.0
+storm_mirror: "http://mirror.catn.com/pub/apache/storm/apache-storm-{{storm_version}}"
 storm_tarball_name: "apache-storm-{{storm_version}}.tar.gz"
-
-##include as role variable
-storm_daemons: [nimbus, supervisor, ui, drpc]
 
 nimbus_thrift_port: 6627
 storm_drpc_extra_config:
-storm_local_dir: "{{cluster_home}}/storm/local"
 storm_java_library_path: "/usr/local/lib:/opt/local/lib:/usr/lib"
 storm_zookeeper_port: "{{zookeeper_client_port}}"
 storm_nimbus_extra_config:

@@ -1,5 +1,6 @@
 ### base
 java.library.path: "{{storm_java_library_path}}"
+storm.log.dir: "{{storm_log_dir}}"
 storm.local.dir: "{{storm_local_dir}}"
 
 ### zookeeper.*
@@ -32,6 +33,7 @@ supervisor.slots.ports:
 {% endif %}
 
 ### nimbus.* configs are for the master
+nimbus.host: {{storm_nimbus_host}}
 nimbus.seeds: [{% for seed in storm_nimbus_seeds %}"{{seed}}"{% if not loop.last %},{% endif %}{% endfor %}]
 nimbus.thrift.port: {{nimbus_thrift_port}}
 {% if storm_nimbus_extra_config.items is defined %}

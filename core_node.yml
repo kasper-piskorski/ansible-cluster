@@ -5,11 +5,14 @@
     cluster_home: /opt/mindmaps/cluster
     resource_home: /opt/mindmaps/resources
     log_home: /var/log/mindmaps/cluster
-    storm_daemons: [nimbus, ui, supervisor]
-    database: cassandra
-    zookeeper_hosts: [ 10.10.10.100, 10.10.10.102, 10.10.10.103 ]
+    zookeeper_hosts: [ 10.10.10.100, 10.10.10.102, 10.10.10.103  ]
+    storm_daemons: [supervisor]
+    storm_local_dir: "{{cluster_home}}/storm/local"
+    storm_log_dir: "{{log_home}}/storm" 
+    storm_nimbus_host: 10.10.10.102
     storm_nimbus_seeds: [ 10.10.10.102 ]
     storm_drpc_hosts: [ 10.10.10.102 ]
+    database: cassandra
     cassandra_num_tokens: 256
     cassandra_hosts: [ 10.10.10.100, 10.10.10.102, 10.10.10.103 ]
     cassandra_seeds: [ 10.10.10.100, 10.10.10.102 ]
