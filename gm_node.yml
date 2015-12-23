@@ -1,29 +1,6 @@
 ---
 - name: Core cluster deployment on GM node
   hosts: graph-servers
-  vars:
-    cluster_home: /opt/mindmaps/cluster
-    resource_home: /opt/mindmaps/resources
-    log_home: /var/log/mindmaps/cluster
-    zookeeper_hosts: [ 10.10.10.100, 10.10.10.102, 10.10.10.103  ]
-    storm_daemons: [nimbus, ui, drpc]
-    storm_local_dir: "{{cluster_home}}/storm/local"
-    storm_log_dir: "{{log_home}}/storm" 
-    storm_nimbus_host: 10.10.10.102
-    storm_nimbus_seeds: [ 10.10.10.102 ]
-    storm_drpc_hosts: [ 10.10.10.102 ]
-    database: cassandra
-    cassandra_num_tokens: 256
-    cassandra_hosts: [ 10.10.10.100, 10.10.10.102, 10.10.10.103]
-    cassandra_seeds: [ 10.10.10.100, 10.10.10.102 ]
-    cassandra_read_consistency: ONE
-    cassandra_write_consistency: ALL
-    cassandra_replication_factor: "{{cassandra_hosts | length }}"
-    cassandra_dir: /var/lib/cassandra
-    cassandra_data_dir: "{{cassandra_dir}}/data"
-    cassandra_commitlog_dir: "{{cassandra_dir}}/commitlog"
-    cassandra_saved_caches_dir: "{{cassandra_dir}}/saved_caches"
-    cassandra_hints_dir : "{{cassandra_dir}}/hints"
   remote_user: kasper
   sudo: yes
 
