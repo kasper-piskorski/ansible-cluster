@@ -1,0 +1,5 @@
+---
+
+- include: core_node.yml
+- include: gm_node.yml
+
