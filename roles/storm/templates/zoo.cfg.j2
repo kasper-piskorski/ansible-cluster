@@ -15,7 +15,11 @@ maxClientCnxns={{zookeeper_maxClientCnxns}}
 # The fist port is used by followers to connect to the leader
 # The second one is used for leader election
 {% for host in zookeeper_hosts %}
-server.{{loop.index}}={{host}}:2888:3888
+	{% if host == ansible_fqdn or host == ansible_default_ipv4.address or host == ansible_hostname %}
+		server.{{loop.index}}=0.0.0.0:2888:3888
+	{% else %}
+		server.{{loop.index}}={{host}}:2888:3888
+	{% endif %}
 {% endfor %}
 
 # To avoid seeks ZooKeeper allocates space in the transaction log file in
