@@ -1,5 +1,5 @@
 {%- for host in zookeeper_hosts -%}
-    {%- if host == host_address -%}
+    {%- if host == ansible_fqdn or host == ansible_default_ipv4.address or host == ansible_hostname -%}
 	{{ loop.index }}
     {%- endif -%}
 {%- endfor -%}
