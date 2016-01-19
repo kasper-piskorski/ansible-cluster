@@ -1,0 +1,32 @@
+---
+#### Global settings ####
+
+host_address: "{{ansible_default_ipv4.address}}"
+root_dir: /opt
+cluster_path: mindmaps/cluster
+cluster_home: "{{root_dir}}/{{cluster_path}}"
+log_home : "/var/log/{{cluster_path}}"
+
+#user and group running the cluster
+user_name: mindmaps
+group_name: mindmaps
+
+#### ZOOKEEPER settings ####
+      
+zk_version: 3.4.7
+zk_mirror: "http://mirrors.muzzy.org.uk/apache/zookeeper/zookeeper-{{zk_version}}"
+zk_tarball_name: "zookeeper-{{zk_version}}.tar.gz"
+
+zookeeper_client_port: 2181
+
+zookeeper_dataDir: "{{cluster_home}}/zookeeper"
+#zookeeper_dataLogDir:
+
+zookeeper_maxClientCnxns: 60
+zookeeper_tick_time: 2000
+zookeeper_init_limit: 5
+zookeeper_sync_limit: 2
+
+zookeeper_purge_interval: 24
+zookeeper_snap_retain_count: 3
+

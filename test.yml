@@ -1,5 +1,5 @@
 ---
-- name: Titan test
+- name: Test
   hosts: 127.0.0.1
   vars:
     cluster_home: /opt/mindmaps/cluster
@@ -8,4 +8,5 @@
   sudo: yes
   
   roles:
-     - titan
+     - common
+     - cassandra

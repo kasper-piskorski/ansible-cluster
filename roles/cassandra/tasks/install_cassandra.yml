@@ -29,6 +29,9 @@
 - name: Configure Titan-Cassandra properties
   template: dest="{{resource_home}}/conf/titan-cassandra.properties" owner={{user_name}} group={{group_name}} src=titan-cassandra.properties.j2
 
+- name: Create ulimit configuration
+  template: dest="{{ulimit_config_location}}" src=limits.conf.j2 
+
 
 
 

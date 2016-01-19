@@ -6,6 +6,7 @@
 
   roles:
      - common
+     - zk
      - storm
      - cassandra
      - supervisor

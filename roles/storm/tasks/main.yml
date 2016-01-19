@@ -1,5 +1,4 @@
 ---
 
-- include: install_zk.yml
 - include: install_storm.yml
 
