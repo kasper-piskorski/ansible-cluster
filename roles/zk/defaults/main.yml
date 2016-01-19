@@ -13,7 +13,7 @@ group_name: mindmaps
 
 #### ZOOKEEPER settings ####
       
-zk_version: 3.4.7
+zk_version: 3.4.6
 zk_mirror: "http://mirrors.muzzy.org.uk/apache/zookeeper/zookeeper-{{zk_version}}"
 zk_tarball_name: "zookeeper-{{zk_version}}.tar.gz"
 
