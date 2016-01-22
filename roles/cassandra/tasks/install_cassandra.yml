@@ -10,6 +10,11 @@
 
 - name: Fetch Cassandra package
   get_url: dest={{cluster_home}} url={{cassandra_mirror}}/{{cassandra_tarball_name}} owner={{user_name}} group={{group_name}}
+  when: cassandra_version  != "2.1.9"
+
+- name: Fetch archived Cassandra package
+  get_url: dest={{cluster_home}} url={{cassandra_archive_mirror}}/{{cassandra_tarball_name}} owner={{user_name}} group={{group_name}}
+  when: cassandra_version  == "2.1.9"
   
 - name: Uncompress Cassandra package
   unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/{{cassandra_tarball_name}}" owner={{user_name}} group={{group_name}}
@@ -25,6 +30,11 @@
 
 - name: Configure Cassandra properties
   template: dest="{{cassandra_server_dir}}/conf/cassandra.yaml" owner={{user_name}} group={{group_name}} src=cassandra.yaml.j2
+  when: cassandra_version  != "2.1.9"
+
+- name: Configure archived Cassandra properties
+  template: dest="{{cassandra_server_dir}}/conf/cassandra.yaml" owner={{user_name}} group={{group_name}} src=cassandra-archive.yaml.j2
+  when: cassandra_version  == "2.1.9"
 
 - name: Configure Titan-Cassandra properties
   template: dest="{{resource_home}}/conf/titan-cassandra.properties" owner={{user_name}} group={{group_name}} src=titan-cassandra.properties.j2

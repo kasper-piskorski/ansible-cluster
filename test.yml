@@ -4,9 +4,13 @@
   vars:
     cluster_home: /opt/mindmaps/cluster
     log_home: /var/log/mindmaps/cluster
+    storm_daemons: [nimbus, supervisor, ui, drpc]
   remote_user: root
   sudo: yes
   
   roles:
      - common
-     - cassandra
+    # - zk
+    # - storm
+    # - cassandra
+    # - supervisor
