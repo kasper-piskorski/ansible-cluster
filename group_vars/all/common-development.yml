@@ -4,8 +4,10 @@ cluster_home: /opt/mindmaps/cluster
 resource_home: /opt/mindmaps/resources
 log_home: /var/log/mindmaps/cluster
 
+zk_version: 3.4.6
 zookeeper_hosts: [ 127.0.0.1 ]
 
+storm_version: 0.10.0
 storm_local_dir: "{{cluster_home}}/storm/local"
 storm_log_dir: "{{log_home}}/storm" 
 storm_nimbus_host: 127.0.0.1
@@ -13,9 +15,12 @@ storm_nimbus_seeds: [ 127.0.0.1 ]
 storm_drpc_hosts: [ 127.0.0.1 ]
 
 database: cassandra
+cassandra_version: 2.1.9
 cassandra_num_tokens: 256
 cassandra_hosts: [ 127.0.0.1 ]
 cassandra_seeds: [ 127.0.0.1 ]
+cassandra_listen_address: 127.0.0.1
+cassandra_rpc_address: 127.0.0.1
 cassandra_read_consistency: ONE
 cassandra_write_consistency: ALL
 cassandra_replication_factor: "{{cassandra_hosts | length }}"

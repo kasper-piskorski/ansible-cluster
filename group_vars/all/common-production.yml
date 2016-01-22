@@ -4,8 +4,10 @@ cluster_home: /opt/mindmaps/cluster
 resource_home: /opt/mindmaps/resources
 log_home: /var/log/mindmaps/cluster
 
+zk_version: 3.4.6
 zookeeper_hosts: [ core-plx122, core-plx123, gm-plx133 ]
 
+storm_version: 0.10.0
 storm_local_dir: "{{cluster_home}}/storm/local"
 storm_log_dir: "{{log_home}}/storm" 
 storm_nimbus_host: gm-plx133
@@ -13,6 +15,7 @@ storm_nimbus_seeds: [ gm-plx133 ]
 storm_drpc_hosts: [ gm-plx133 ]
 
 database: cassandra
+cassandra_version: 2.1.9
 cassandra_num_tokens: 256
 cassandra_hosts: [ core-plx122, core-plx123, gm-plx133 ]
 cassandra_seeds: [ core-plx123, gm-plx133 ]
