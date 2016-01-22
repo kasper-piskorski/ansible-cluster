@@ -10,7 +10,7 @@
   file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
   with_items:
        - "{{cluster_home}}"
-      # - "{{resource_home}}/conf"
+       - "{{resource_home}}/conf"
        - "{{log_home}}"
 
 
