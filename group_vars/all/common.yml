@@ -5,6 +5,7 @@ resource_home: /opt/mindmaps/resources
 log_home: /var/log/mindmaps/cluster
 
 zk_version: 3.4.6
+zookeeper_client_port: 2181
 zookeeper_hosts: [ core-plx122, core-plx123, gm-plx133 ]
 
 storm_version: 0.10.0
