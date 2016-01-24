@@ -21,13 +21,21 @@ nimbus_thrift_port: 6627
 storm_drpc_extra_config:
 storm_java_library_path: "/usr/local/lib:/opt/local/lib:/usr/lib"
 storm_zookeeper_port: "{{zookeeper_client_port}}"
+
+storm_drpc_extra_config:
+    drpc.request.timeout.secs: 300
 storm_nimbus_extra_config:
     nimbus.childopts: "-Xmx4g "
+    nimbus.task.timeout.secs: 300
+    nimbus.supervisor.timeout.secs: 300
 storm_supervisor_extra_config:
     supervisor.childopts: "-Xmx4g "
+    supervisor.worker.timeout.secs: 300
 storm_topology_extra_config:
     topology.acker.executors: 1
     topology.debug: false
+    topology.message.timeout.secs: 300
+
 storm_transactional_extra_config:
     transactional.zookeeper.port: "{{ storm_zookeeper_port }}"
     transactional.zookeeper.root: "/storm-transactional"
