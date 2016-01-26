@@ -10,3 +10,11 @@ $ sudo apt-get update
 $ sudo apt-get install ansible
 ```
 
+# Local deployment
+
+```
+cd CLONE_DIR
+cp group_vars/all/common-development.yml group_vars/all/common.yml
+sudo ansible-playbook local.yml
+```
+
