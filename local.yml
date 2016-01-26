@@ -1,5 +1,5 @@
 ---
-- name: Test
+- name: mindmaps-local-cluster
   hosts: 127.0.0.1
   vars:
     cluster_home: /opt/mindmaps/cluster
@@ -10,7 +10,7 @@
   
   roles:
      - common
-    # - zk
-    # - storm
-    # - cassandra
-    # - supervisor
+     - zk
+     - storm
+     - cassandra
+     - supervisor
