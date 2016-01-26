@@ -16,7 +16,7 @@ brew install ansible
 ```
 
 # Local deployment
-
+Deployment components can be adjusted in local.yml file. A given component (if already exists) should be removed from the cluster dir prior to deployment.
 ```
 cd CLONE_DIR
 cp group_vars/all/common-development.yml group_vars/all/common.yml
