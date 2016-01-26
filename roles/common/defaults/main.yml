@@ -11,3 +11,5 @@ log_home : "/var/log/{{cluster_path}}"
 #user and group running the cluster
 user_name: mindmaps
 group_name: mindmaps
+
+install_jdk: no
