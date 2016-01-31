@@ -18,7 +18,6 @@ storm_mirror: "http://mirror.catn.com/pub/apache/storm/apache-storm-{{storm_vers
 storm_tarball_name: "apache-storm-{{storm_version}}.tar.gz"
 
 nimbus_thrift_port: 6627
-storm_drpc_extra_config:
 storm_java_library_path: "/usr/local/lib:/opt/local/lib:/usr/lib"
 storm_zookeeper_port: "{{zookeeper_client_port}}"
 
