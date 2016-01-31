@@ -15,6 +15,30 @@ storm_nimbus_host: gm-plx133
 storm_nimbus_seeds: [ gm-plx133 ]
 storm_drpc_hosts: [ gm-plx133 ]
 
+storm_drpc_extra_config:
+    drpc.request.timeout.secs: 300
+    drpc.max_buffer_size: 1048576
+    drpc.childopts: "-Xmx1g"
+storm_worker_extra_config:   
+    worker.childopts: -Xmx64g
+storm_nimbus_extra_config:
+    nimbus.childopts: "-Xmx4g "
+    nimbus.task.timeout.secs: 300
+    nimbus.supervisor.timeout.secs: 300
+storm_supervisor_extra_config:
+    supervisor.childopts: "-Xmx64g "
+    supervisor.worker.timeout.secs: 300
+storm_topology_extra_config:
+    topology.acker.executors: 1
+    topology.debug: false
+    topology.message.timeout.secs: 300
+
+storm_ui_port: 8081
+storm_ui_extra_config:
+    ui.childopts: "-Xmx768m"
+storm_worker_extra_config:
+    worker.childopts: "-Xmx4g -XX:+UseConcMarkSweepGC -Dcom.sun.management.jmxremote"
+
 database: cassandra
 cassandra_version: 2.1.9
 cassandra_num_tokens: 256
