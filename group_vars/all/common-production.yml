@@ -44,8 +44,6 @@ storm_topology_extra_config:
 storm_ui_port: 8081
 storm_ui_extra_config:
     ui.childopts: "-Xmx768m"
-storm_worker_extra_config:
-    worker.childopts: "-Xmx4g -XX:+UseConcMarkSweepGC -Dcom.sun.management.jmxremote"
 
 database: cassandra
 cassandra_version: 2.1.9
