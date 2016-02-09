@@ -157,7 +157,7 @@ key_cache_size_in_mb: {{cassandra_key_cache_size_in_mb}}
 # has limited use.
 #
 # Default is 14400 or 4 hours.
-key_cache_save_period: {[cassandra_key_cache_save_period}}
+key_cache_save_period: {{cassandra_key_cache_save_period}}
 
 # Number of keys from the key cache to save
 # Disabled by default, meaning all keys are going to be saved
@@ -306,7 +306,7 @@ ssl_storage_port: {{cassandra_ssl_storage_port}}
 # address associated with the hostname (it might not be).
 #
 # Setting this to 0.0.0.0 is always wrong.
-listen_address: {{cassandra_listen_address}}
+listen_address: {% for host in cassandra_hosts %}{% if host == ansible_fqdn or host == ansible_default_ipv4.address or host == ansible_hostname %}{{host}}{% endif %}{% endfor %}
 
 # Address to broadcast to other Cassandra nodes
 # Leaving this blank will set it to the same value as listen_address
@@ -344,7 +344,7 @@ start_rpc: true
 # Note that unlike ListenAddress above, it is allowed to specify 0.0.0.0
 # here if you want to listen on all interfaces, but that will break clients 
 # that rely on node auto-discovery.
-rpc_address: {{cassandra_rpc_address}}
+rpc_address: {% for host in cassandra_hosts %}{% if host == ansible_fqdn or host == ansible_default_ipv4.address or host == ansible_hostname %}{{host}}{% endif %}{% endfor %}
 # port for Thrift to listen for clients on
 rpc_port: {{cassandra_rpc_port}}
 

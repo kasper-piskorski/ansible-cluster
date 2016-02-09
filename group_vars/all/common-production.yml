@@ -6,7 +6,7 @@ log_home: /var/log/mindmaps/cluster
 
 zk_version: 3.4.6
 zookeeper_client_port: 2181
-zookeeper_hosts: [ core-plx124, core-plx121, core-plx122, gm-plx133 ]
+zookeeper_hosts: [ core-plx122, core-plx124, gm-plx133, core-plx121 ]
 zookeeper_purge_interval: 2
 zookeeper_snap_retain_count: 3
 
@@ -48,7 +48,7 @@ storm_ui_extra_config:
 database: cassandra
 cassandra_version: 2.1.9
 cassandra_num_tokens: 256
-cassandra_hosts: [ core-plx124, core-plx121, core-plx122, gm-plx133 ]
+cassandra_hosts: [ core-plx122, core-plx124, gm-plx133, core-plx121 ]
 cassandra_seeds: [ core-plx122, gm-plx133 ]
 
 cassandra_read_consistency: ONE

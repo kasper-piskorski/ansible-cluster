@@ -462,7 +462,7 @@ ssl_storage_port: {{cassandra_ssl_storage_port}}
 # you can specify which should be chosen using listen_interface_prefer_ipv6. If false the first ipv4
 # address will be used. If true the first ipv6 address will be used. Defaults to false preferring
 # ipv4. If there is only one address it will be selected regardless of ipv4/ipv6.
-listen_address: {{cassandra_listen_address}}
+listen_address: {% for host in cassandra_hosts %}{% if host == ansible_fqdn or host == ansible_default_ipv4.address or host == ansible_hostname %}{{host}}{% endif %}{% endfor %}
 # listen_interface: eth0
 # listen_interface_prefer_ipv6: false
 
@@ -528,7 +528,7 @@ start_rpc: true
 # you can specify which should be chosen using rpc_interface_prefer_ipv6. If false the first ipv4
 # address will be used. If true the first ipv6 address will be used. Defaults to false preferring
 # ipv4. If there is only one address it will be selected regardless of ipv4/ipv6.
-rpc_address: {{cassandra_rpc_address}}
+rpc_address: {% for host in cassandra_hosts %}{% if host == ansible_fqdn or host == ansible_default_ipv4.address or host == ansible_hostname %}{{host}}{% endif %}{% endfor %}
 # rpc_interface: eth1
 # rpc_interface_prefer_ipv6: false
 
