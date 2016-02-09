@@ -31,6 +31,8 @@ storage.cassandra.keyspace=mindmaps
 storage.cassandra.read-consistency-level={{cassandra_read_consistency}}
 storage.cassandra.write-consistency-level={{cassandra_write_consistency}}
 storage.cassandra.replication-factor={{cassandra_replication_factor}}
+storage.cassandra.frame-size-mb={{cassandra_frame_size}}
+
 
 # Whether to enable Titan's database-level cache, which is shared across
 # all transactions. Enabling this option speeds up traversals by holding
@@ -73,7 +75,7 @@ cache.db-cache-clean-wait = 20
 # storage backend.  After starting the database for the first time, this
 # file's copy of this setting is ignored.  Use Titan's Management System
 # to read or modify this value after bootstrapping.
-cache.db-cache-time = 180000
+cache.db-cache-time = {{titan_cache_time}}
 
 # Size of Titan's database level cache.  Values between 0 and 1 are
 # interpreted as a percentage of VM heap, while larger values are
@@ -82,4 +84,4 @@ cache.db-cache-time = 180000
 # Default:    0.3
 # Data Type:  Double
 # Mutability: MASKABLE
-cache.db-cache-size = 0.5
+cache.db-cache-size = {{titan_cache_size}}
