@@ -13,4 +13,5 @@
      - zk
      - storm
      - cassandra
+     - es
      - supervisor

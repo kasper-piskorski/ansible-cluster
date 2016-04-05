@@ -1,0 +1,48 @@
+############# ElasticSearch Part ###############
+
+# Connect to an already-running ES instance on localhost
+
+# The indexing backend used to extend and optimize Titan's query
+# functionality. This setting is optional.  Titan can use multiple
+# heterogeneous index backends.  Hence, this option can appear more than
+# once, so long as the user-defined name between "index" and "backend" is
+# unique among appearances.Similar to the storage backend, this should be
+# set to one of Titan's built-in shorthand names for its standard index
+# backends (shorthands: lucene, elasticsearch, es, solr) or to the full
+# package and classname of a custom/third-party IndexProvider
+# implementation.
+#
+# Default:    elasticsearch
+# Data Type:  String
+# Mutability: GLOBAL_OFFLINE
+#
+# Settings with mutability GLOBAL_OFFLINE are centrally managed in Titan's
+# storage backend.  After starting the database for the first time, this
+# file's copy of this setting is ignored.  Use Titan's Management System
+# to read or modify this value after bootstrapping.
+index.search.backend=elasticsearch
+
+# The hostname or comma-separated list of hostnames of index backend
+# servers.  This is only applicable to some index backends, such as
+# elasticsearch and solr.
+#
+# Default:    127.0.0.1
+# Data Type:  class java.lang.String[]
+# Mutability: MASKABLE
+index.search.hostname={% for host in elasticsearch_hosts %}{{host}}{% if not loop.last %}, {% endif %}{% endfor %}
+
+# The Elasticsearch node.client option is set to this boolean value, and
+# the Elasticsearch node.data option is set to the negation of this value.
+# True creates a thin client which holds no data.  False creates a regular
+# Elasticsearch cluster node that may store data.
+#
+# Default:    true
+# Data Type:  Boolean
+# Mutability: GLOBAL_OFFLINE
+#
+# Settings with mutability GLOBAL_OFFLINE are centrally managed in Titan's
+# storage backend.  After starting the database for the first time, this
+# file's copy of this setting is ignored.  Use Titan's Management System
+# to read or modify this value after bootstrapping.
+index.search.elasticsearch.client-only=true
+
