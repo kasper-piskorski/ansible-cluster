@@ -20,6 +20,6 @@ Deployment components can be adjusted in local.yml file. A given component (if a
 ```
 cd CLONE_DIR
 cp group_vars/all/common-development.yml group_vars/all/common.yml
-sudo ansible-playbook local.yml
+sudo ansible-playbook -i staging local.yml
 ```
 
