@@ -488,8 +488,8 @@ discovery.zen.ping.multicast.enabled: {{ elasticsearch_discovery_zen_ping_multic
 #    to perform discovery when new nodes (master or data) are started:
 #
 # discovery.zen.ping.unicast.hosts: ["host1", "host2:port", "host3[portX-portY]"]
-{% if elasticsearch_discovery_zen_ping_unicast_hosts is defined %}
-discovery.zen.ping.unicast.hosts: {{ elasticsearch_discovery_zen_ping_unicast_hosts }}
+{% if elasticsearch_hosts is defined %}
+discovery.zen.ping.unicast.hosts: {% for host in elasticsearch_hosts %}{{host}}{% if not loop.last %},{% endif %}{% endfor %}
 {% endif %}
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.
@@ -677,4 +677,15 @@ script.groovy.sandbox.enabled: {{ elasticsearch_script_groovy_sandbox_enabled }}
 {% if elasticsearch_cluster_routing_allocation_zone_awareness is defined %}
 cluster.routing.allocation.awareness.attributes: zone
 node.zone: {{ facter_ec2_placement_availability_zone }}
+{% endif %}
+
+
+{% if elasticsearch_titan_scripting == true %}
+
+################################## Titan Scripting ########################################
+
+script.inline: true
+script.indexed: true
+script.groovy.sandbox.enabled: true
+
 {% endif %}

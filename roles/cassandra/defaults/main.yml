@@ -34,6 +34,10 @@ cassandra_data_dir: /var/lib/cassandra/data
 cassandra_commitlog_dir: /var/lib/cassandra/commitlog
 cassandra_saved_caches_dir: /var/lib/cassandra/saved_caches
 
+cassandra_concurrent_reads: 16
+cassandra_concurrent_writes: 16
+
+
 #ports
 cassandra_storage_port: 7000
 cassandra_ssl_storage_port: 7001

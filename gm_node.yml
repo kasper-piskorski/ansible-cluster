@@ -1,12 +1,12 @@
 ---
 - name: Core cluster deployment on GM node
   hosts: graph-servers
-  remote_user: kasper
-  sudo: yes
+  remote_user: root
 
   roles:
      - common
      - zk
      - storm
-     - cassandra	
+     - cassandra
+     - es	
      - supervisor

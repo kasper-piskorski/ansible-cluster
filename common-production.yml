@@ -45,7 +45,10 @@ storm_ui_port: 8081
 storm_ui_extra_config:
     ui.childopts: "-Xmx768m"
 
-database: cassandra
+database: cassandra-es
+
+##### CASSANDRA #####
+
 cassandra_version: 2.1.9
 cassandra_num_tokens: 256
 cassandra_hosts: [ core-plx122, core-plx124, gm-plx133, core-plx121 ]
@@ -69,6 +72,25 @@ cassandra_row_cache_size_in_mb: 4096
 cassandra_row_cache_save_period: 14400
 cassandra_concurrent_reads: 128
 cassandra_concurrent_writes: 128
+
+##### ELASTICSEARCH #####
+
+elasticsearch_version: 1.5.1
+
+elasticsearch_network_host: "{{host_address}}"
+elasticsearch_host_address: "{{host_address}}"
+elasticsearch_discovery_zen_ping_multicast_enabled: false
+elasticsearch_hosts: ["{{elasticsearch_host_address}}"]
+
+elasticsearch_network_transport_tcp_port: 9300
+elasticsearch_network_http_port: 9200
+
+elasticsearch_home_dir: "{{cluster_home}}/elasticsearch" 
+elasticsearch_plugin_dir: "{{cluster_home}}/elasticsearch/plugins"
+elasticsearch_log_dir: "{{log_home}}/elasticsearch"
+elasticsearch_data_dir: /var/lib/elasticsearch/data
+elasticsearch_work_dir: /var/lib/elasticsearch/work
+elasticsearch_conf_dir: "{{elasticsearch_home_dir}}/config"
 
 
 

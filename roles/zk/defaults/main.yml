@@ -17,6 +17,8 @@ zk_version: 3.4.6
 zk_mirror: "http://apache.mirror.anlx.net/zookeeper/zookeeper-{{zk_version}}"
 zk_tarball_name: "zookeeper-{{zk_version}}.tar.gz"
 
+zookeeper_hosts: [ "{{host_address}}" ]
+
 zookeeper_client_port: 2181
 
 zookeeper_dataDir: "{{cluster_home}}/zookeeper"

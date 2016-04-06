@@ -4,6 +4,10 @@
 {% if database == "cassandra" %}
 {% include "supervisor-cassandra.conf.j2" %}
 
+{% elif database == "cassandra-es" %}
+{% include "supervisor-cassandra.conf.j2" %}
+{% include "supervisor-elasticsearch.conf.j2" %}
+
 {% elif database == "neo4j" %}
 {% include "supervisor-neo4j.conf.j2" %}
 

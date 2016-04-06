@@ -6,22 +6,17 @@ log_home: /var/log/mindmaps/cluster
 
 zk_version: 3.4.6
 zookeeper_client_port: 2181
-zookeeper_hosts: [ 127.0.0.1 ]
 
 storm_version: 0.10.0
 storm_local_dir: "{{cluster_home}}/storm/local"
 storm_log_dir: "{{log_home}}/storm" 
-storm_nimbus_host: 127.0.0.1
-storm_nimbus_seeds: [ 127.0.0.1 ]
-storm_drpc_hosts: [ 127.0.0.1 ]
 
-database: cassandra
+database: cassandra-es
+
+##### CASSANDRA #####
+
 cassandra_version: 2.1.9
 cassandra_num_tokens: 256
-cassandra_hosts: [ 127.0.0.1 ]
-cassandra_seeds: [ 127.0.0.1 ]
-cassandra_listen_address: 127.0.0.1
-cassandra_rpc_address: 127.0.0.1
 cassandra_read_consistency: ONE
 cassandra_write_consistency: ALL
 cassandra_replication_factor: "{{cassandra_hosts | length }}"
@@ -30,4 +25,19 @@ cassandra_data_dir: "{{cassandra_dir}}/data"
 cassandra_commitlog_dir: "{{cassandra_dir}}/commitlog"
 cassandra_saved_caches_dir: "{{cassandra_dir}}/saved_caches"
 cassandra_hints_dir : "{{cassandra_dir}}/hints"
+
+cassandra_concurrent_reads: 16
+cassandra_concurrent_writes: 16
+
+
+##### ELASTICSEARCH #####
+
+elasticsearch_version: 1.5.1
+
+elasticsearch_home_dir: "{{cluster_home}}/elasticsearch" 
+elasticsearch_plugin_dir: "{{cluster_home}}/elasticsearch/plugins"
+elasticsearch_log_dir: "{{log_home}}/elasticsearch"
+elasticsearch_data_dir: /var/lib/elasticsearch/data
+elasticsearch_work_dir: /var/lib/elasticsearch/work
+elasticsearch_conf_dir: "{{elasticsearch_home_dir}}/config"
 

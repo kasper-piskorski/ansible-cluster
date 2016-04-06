@@ -37,7 +37,7 @@
   when: cassandra_version  == "2.1.9"
 
 - name: Configure Titan-Cassandra properties
-  template: dest="{{resource_home}}/conf/titan-cassandra.properties" owner={{user_name}} group={{group_name}} src=titan-cassandra.properties.j2
+  template: dest="{{resource_home}}/conf/titan-cassandra.properties" src=titan-cassandra.properties.j2 owner={{user_name}} group={{group_name}} mode=755 
 
 - name: Create ulimit configuration
   template: dest="{{ulimit_config_location}}" src=limits.conf.j2 

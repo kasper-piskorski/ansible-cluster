@@ -13,8 +13,8 @@
        - uuid-dev
        - tar
        - gzip
-	   - htop
-  	   - ntp
+       - htop
+       - ntp
        - unzip
 
 - include: install_jdk.yml

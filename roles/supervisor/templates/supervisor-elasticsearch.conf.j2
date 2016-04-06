@@ -1,5 +1,5 @@
-[program:cassandra]
-command={{cluster_home}}/cassandra/bin/cassandra -f
+[program:elasticsearch]
+command={{cluster_home}}/elasticsearch/bin/elasticsearch
 user={{user_name}}
 autostart=true
 autorestart=true
@@ -8,11 +8,11 @@ exitcodes=0
 startretries=999
 log_stdout=true
 log_stderr=true
-stdout_logfile={{log_home}}/cassandra/cassandra.log
+stdout_logfile={{log_home}}/elasticsearch/es.log
 stdout_logfile_maxbytes=10MB
 stdout_logfile_backups=10
 stdout_events_enabled=true
-stderr_logfile={{log_home}}/cassandra/cassandra-error.log
+stderr_logfile={{log_home}}/elasticsearch/es-error.log
 stderr_logfile_maxbytes=100MB
 stderr_logfile_backups=10
 stderr_events_enabled=true

@@ -146,7 +146,9 @@ commit_failure_policy: stop
 # NOTE: if you reduce the size, you may not get you hottest keys loaded on startup.
 #
 # Default value is empty to make it "auto" (min(5% of Heap (in MB), 100MB)). Set to 0 to disable key cache.
+{% if cassandra_key_cache_size_in_mb is defined %}
 key_cache_size_in_mb: {{cassandra_key_cache_size_in_mb}}
+{% endif %}
 
 # Duration in seconds after which Cassandra should
 # save the key cache. Caches are saved to saved_caches_directory as
@@ -157,7 +159,9 @@ key_cache_size_in_mb: {{cassandra_key_cache_size_in_mb}}
 # has limited use.
 #
 # Default is 14400 or 4 hours.
+{% if cassandra_key_cache_save_period is defined %}
 key_cache_save_period: {{cassandra_key_cache_save_period}}
+{% endif %}
 
 # Number of keys from the key cache to save
 # Disabled by default, meaning all keys are going to be saved
@@ -167,7 +171,9 @@ key_cache_save_period: {{cassandra_key_cache_save_period}}
 # NOTE: if you reduce the size, you may not get you hottest keys loaded on startup.
 #
 # Default value is 0, to disable row caching.
+{% if cassandra_row_cache_size_in_mb is defined %}
 row_cache_size_in_mb: {{cassandra_row_cache_size_in_mb}}
+{% endif %}
 
 # Duration in seconds after which Cassandra should
 # safe the row cache. Caches are saved to saved_caches_directory as specified
@@ -178,7 +184,9 @@ row_cache_size_in_mb: {{cassandra_row_cache_size_in_mb}}
 # has limited use.
 #
 # Default is 0 to disable saving the row cache.
+{% if cassandra_row_cache_save_period is defined %}
 row_cache_save_period: {{cassandra_row_cache_save_period}}
+{% endif %}
 
 # Number of keys from the row cache to save
 # Disabled by default, meaning all keys are going to be saved
@@ -345,6 +353,7 @@ start_rpc: true
 # here if you want to listen on all interfaces, but that will break clients 
 # that rely on node auto-discovery.
 rpc_address: {% for host in cassandra_hosts %}{% if host == ansible_fqdn or host == ansible_default_ipv4.address or host == ansible_hostname %}{{host}}{% endif %}{% endfor %}
+
 # port for Thrift to listen for clients on
 rpc_port: {{cassandra_rpc_port}}
 

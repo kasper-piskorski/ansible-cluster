@@ -14,24 +14,32 @@ group_name: mindmaps
 
 #### Elasticsearch Ansible Variables ####
 
-elasticsearch_user: {{user_name}}
-elasticsearch_group: {{group_name}}
-elasticsearch_download_url: https://download.elastic.co/elasticsearch/elasticsearch/
+elasticsearch_user: "{{user_name}}"
+elasticsearch_group: "{{group_name}}"
+elasticsearch_download_url: https://download.elastic.co/elasticsearch/elasticsearch
 elasticsearch_version: 1.5.1
-cassandra_tarball_name: elasticsearch-{{elasticsearch_version}}.tar.gz"
+elasticsearch_tarball_name: "elasticsearch-{{elasticsearch_version}}.tar.gz"
 
+elasticsearch_cluster_name: elasticsearch
+elasticsearch_titan_scripting: true
+
+elasticsearch_network_host: "{{host_address}}"
 elasticsearch_host_address: "{{host_address}}"
+elasticsearch_discovery_zen_ping_multicast_enabled: false
 elasticsearch_hosts: ["{{elasticsearch_host_address}}"]
 
 elasticsearch_network_transport_tcp_port: 9300
 elasticsearch_network_http_port: 9200
+
+elasticsearch_index_number_of_shards: 5
+elasticsearch_index_number_of_replicas: "{{elasticsearch_hosts | length }}"
 
 elasticsearch_home_dir: "{{cluster_home}}/elasticsearch" 
 elasticsearch_plugin_dir: "{{cluster_home}}/elasticsearch/plugins"
 elasticsearch_log_dir: "{{log_home}}/elasticsearch"
 elasticsearch_data_dir: /var/lib/elasticsearch/data
 elasticsearch_work_dir: /var/lib/elasticsearch/work
-elasticsearch_conf_dir: "{{elasticsearch_home_dir}}/conf"
+elasticsearch_conf_dir: "{{elasticsearch_home_dir}}/config"
 
 
 
