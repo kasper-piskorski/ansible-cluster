@@ -24,9 +24,8 @@ elasticsearch_cluster_name: elasticsearch
 elasticsearch_titan_scripting: true
 
 elasticsearch_network_host: "{{host_address}}"
-elasticsearch_host_address: "{{host_address}}"
 elasticsearch_discovery_zen_ping_multicast_enabled: false
-elasticsearch_hosts: ["{{elasticsearch_host_address}}"]
+elasticsearch_hosts: ["{{elasticsearch_network_address}}"]
 
 elasticsearch_network_transport_tcp_port: 9300
 elasticsearch_network_http_port: 9200

@@ -1,7 +1,8 @@
 ---
 - name: Core cluster deployment on GM node
   hosts: graph-servers
-  remote_user: root
+  remote_user: kasper
+  sudo: yes
 
   roles:
      - common

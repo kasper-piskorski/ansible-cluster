@@ -6,6 +6,15 @@
     - "{{elasticsearch_data_dir}}"
     - "{{elasticsearch_work_dir}}"
 
+# Sort out dependencies
+- name: Install packages
+  apt: name={{item}} state=present
+  with_items:
+       - curl
+       - htop
+       - ntp
+       - unzip
+
 - name: Fetch ElasticSearch package
   get_url: dest={{cluster_home}} url={{elasticsearch_download_url}}/{{elasticsearch_tarball_name}} owner={{user_name}} group={{group_name}}
 
@@ -25,13 +34,17 @@
   file: path="{{resource_home}}/conf/temp" state=directory owner={{user_name}} group={{group_name}} mode=755
 
 - name: Copy Titan-Cassandra properties
-  copy: src="{{resource_home}}/conf/titan-cassandra.properties" dest="{{resource_home}}/conf/temp/titan-cassandra.properties" owner={{user_name}} group={{group_name}} mode=755
+  command: cp {{resource_home}}/conf/titan-cassandra.properties {{resource_home}}/conf/temp/titan-cassandra.properties
+  #copy: src="{{resource_home}}/conf/titan-cassandra.properties" dest="{{resource_home}}/conf/temp/titan-cassandra.properties" owner={{user_name}} group={{group_name}} mode=755
 
 - name: Configure Titan-Cassandra-Elasticsearch properties
   template: dest="{{resource_home}}/conf/temp/titan-cassandra-es.properties" owner={{user_name}} group={{group_name}} src=titan-cassandra-es.properties.j2 owner={{user_name}} group={{group_name}} mode=755
 
 - name: Merge Titan-Cassandra-Elasticsearch properties
   assemble: src="{{resource_home}}/conf/temp" dest="{{resource_home}}/conf/titan-cassandra-es.properties" owner={{user_name}} group={{group_name}} mode=755
+
+- name: Remove temp dir for config
+  file: path="{{resource_home}}/conf/temp" state=absent
 
 
 

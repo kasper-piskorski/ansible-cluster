@@ -107,7 +107,7 @@ index.search.backend=elasticsearch
 # Default:    127.0.0.1
 # Data Type:  class java.lang.String[]
 # Mutability: MASKABLE
-index.search.hostname={{elasticsearch_host_address}}
+index.search.hostname={% for host in elasticsearch_hosts %}{{host}}{% if not loop.last %}, {% endif %}{% endfor %}
 
 # The Elasticsearch node.client option is set to this boolean value, and
 # the Elasticsearch node.data option is set to the negation of this value.

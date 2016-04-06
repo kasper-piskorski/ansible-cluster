@@ -77,10 +77,8 @@ cassandra_concurrent_writes: 128
 
 elasticsearch_version: 1.5.1
 
-elasticsearch_network_host: "{{host_address}}"
-elasticsearch_host_address: "{{host_address}}"
 elasticsearch_discovery_zen_ping_multicast_enabled: false
-elasticsearch_hosts: ["{{elasticsearch_host_address}}"]
+elasticsearch_hosts: [core-plx122, core-plx124, gm-plx133, core-plx121]
 
 elasticsearch_network_transport_tcp_port: 9300
 elasticsearch_network_http_port: 9200

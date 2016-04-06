@@ -35,9 +35,7 @@ cluster.name: {{ elasticsearch_cluster_name }}
 # from configuring them manually. You can tie this node to a specific name:
 #
 # node.name: "Franz Kafka"
-{% if elasticsearch_node_name is defined %}
-node.name: {{ elasticsearch_node_name }}
-{% endif %}
+node.name: es-{% for host in elasticsearch_hosts %}{% if host == ansible_fqdn or host == ansible_default_ipv4.address or host == ansible_hostname %}{{host}}{% endif %}{% endfor %}
 
 # Every node can be configured to allow or deny being eligible as the master,
 # and to allow or deny to store the data.
@@ -288,7 +286,7 @@ network.publish_host: {{ elasticsearch_network_publish_host }}
 #
 # network.host: 192.168.0.1
 {% if elasticsearch_network_host is defined %}
-network.host: {{ elasticsearch_network_host }}
+network.host: {% for host in elasticsearch_hosts %}{% if host == ansible_fqdn or host == ansible_default_ipv4.address or host == ansible_hostname %}{{host}}{% endif %}{% endfor %}
 {% endif %}
 
 # Set a custom port for the node to node communication (9300 by default):
@@ -489,7 +487,7 @@ discovery.zen.ping.multicast.enabled: {{ elasticsearch_discovery_zen_ping_multic
 #
 # discovery.zen.ping.unicast.hosts: ["host1", "host2:port", "host3[portX-portY]"]
 {% if elasticsearch_hosts is defined %}
-discovery.zen.ping.unicast.hosts: {% for host in elasticsearch_hosts %}{{host}}{% if not loop.last %},{% endif %}{% endfor %}
+discovery.zen.ping.unicast.hosts: {% for host in elasticsearch_hosts %}{{host}}{% if not loop.last %}, {% endif %}{% endfor %}
 {% endif %}
 
 # EC2 discovery allows to use AWS EC2 API in order to perform discovery.
