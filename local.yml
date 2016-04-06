@@ -8,9 +8,9 @@
 
   remote_user: root
   roles:
-     #- common
-     #- zk
-     #- storm
-     #- cassandra
+     - common
+     - zk
+     - storm
+     - cassandra
      - es
-     #- supervisor
+     - supervisor
