@@ -1,6 +1,6 @@
 ---
 - name: mindmaps-local-cluster
-  hosts: core-servers
+  hosts: graph-servers
   vars:
     cluster_home: /opt/mindmaps/cluster
     log_home: /var/log/mindmaps/cluster
