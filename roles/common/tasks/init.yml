@@ -14,23 +14,3 @@
        - "{{log_home}}"
 
 
-- name: Check if ZK paths exists
-  stat: path="{{cluster_home}}/zookeeper"  
-  register: zookeeper_path
-
-- name: Check if Storm path exists
-  stat: path={{cluster_home}}/storm
-  register: storm_path
-
-- name: Check if Neo4j path exists
-  stat: path={{cluster_home}}/neo4j
-  register: neo4j_path
-
-- name: Check if Cassandra path exists
-  stat: path={{cluster_home}}/cassandra
-  register: cassandra_path
-
-- name: Check if Titan path exists
-  stat: path={{cluster_home}}/titandb
-  register: titan_path
-

@@ -1,0 +1,20 @@
+[program:redis-slave]
+command={{cluster_home}}/redis/bin/redis-server {{cluster_home}}/redis/redis-slave.conf
+user={{user_name}}
+autostart=true
+autorestart=true
+startsecs=10
+exitcodes=0
+startretries=999
+log_stdout=true
+log_stderr=true
+stdout_logfile={{log_home}}/redis/redis-sp-slave.log
+stdout_logfile_maxbytes=10MB
+stdout_logfile_backups=10
+stdout_events_enabled=true
+stderr_logfile={{log_home}}/redis/redis-sp-slave-error.log
+stderr_logfile_maxbytes=100MB
+stderr_logfile_backups=10
+stderr_events_enabled=true
+
+

@@ -1,0 +1,43 @@
+---
+- name: Create ElasticSearch log and local directories
+  file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
+  with_items:
+    - "{{redis_log_dir}}"
+    - "{{redis_data_dir}}"
+
+#- include: install_deps.yml
+
+- name: Fetch Redis package
+  get_url: dest={{cluster_home}} url={{redis_download_url}}/{{redis_tarball_name}} owner={{user_name}} group={{group_name}}
+
+- name: Uncompress Redis package
+  unarchive: copy=no  dest={{cluster_home}} src="{{redis_download_url}}/{{redis_tarball_name}}" owner={{user_name}} group={{group_name}}
+
+- name: Remove archive
+  file: path="{{cluster_home}}/{{redis_tarball_name}}" state=absent
+
+- name: Rename
+  command: mv {{cluster_home}}/redis-{{redis_version}} {{cluster_home}}/redis
+
+- name: Compile redis
+  command: make -j4
+  args:
+    chdir: "{{ redis_home_dir }}"
+    creates: "{{ redis_home_dir }}/src/redis-server"
+
+- name: install redis
+  command: make PREFIX={{ redis_home_dir }} install
+  args:
+    chdir: "{{ redis_home_dir }}"
+    #creates: "{{ redis_home_dir }}/bin/redis-server"
+
+- name: Configure Redis-master 
+  template: dest="{{redis_home_dir}}/redis-master.conf" owner={{user_name}} group={{group_name}} src=redis-master.conf.j2
+  when: "'master' in redis_roles"
+
+- name: Configure Redis-slave
+  template: dest="{{redis_home_dir}}/redis-slave.conf" owner={{user_name}} group={{group_name}} src=redis-slave.conf.j2
+  when: "'slave' in redis_roles"
+
+
+  

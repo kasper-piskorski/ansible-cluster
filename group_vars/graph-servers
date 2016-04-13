@@ -5,5 +5,5 @@ storm_daemons: [nimbus, supervisor, ui, drpc]
 elasticsearch_thread_pools:
     threadpool.bulk.queue_size: 10000
 
-elasticsearch_extra_settings:
-    action.write_consistency: one
+#elasticsearch_extra_settings:
+#    action.write_consistency: one

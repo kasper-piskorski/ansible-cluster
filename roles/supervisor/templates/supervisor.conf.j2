@@ -16,3 +16,10 @@
 
 {% endif %}
 
+{% if 'master' in redis_roles %}
+{% include "supervisor-redis-master.conf.j2" %}
+{% endif %}
+
+{% if 'slave' in redis_roles %}
+{% include "supervisor-redis-slave.conf.j2" %}
+{% endif %}
