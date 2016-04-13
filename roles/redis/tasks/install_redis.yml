@@ -5,7 +5,12 @@
     - "{{redis_log_dir}}"
     - "{{redis_data_dir}}"
 
-#- include: install_deps.yml
+- name: Install dependencies
+  apt: name={{item}} state=present
+  with_items:
+    - gcc
+    - make
+    - libc6-dev
 
 - name: Fetch Redis package
   get_url: dest={{cluster_home}} url={{redis_download_url}}/{{redis_tarball_name}} owner={{user_name}} group={{group_name}}
@@ -25,7 +30,7 @@
     chdir: "{{ redis_home_dir }}"
     creates: "{{ redis_home_dir }}/src/redis-server"
 
-- name: install redis
+- name: Install redis
   command: make PREFIX={{ redis_home_dir }} install
   args:
     chdir: "{{ redis_home_dir }}"

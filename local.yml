@@ -14,4 +14,4 @@
      #- cassandra
      #- es
      - redis
-     - supervisor
+     #- supervisor

@@ -10,4 +10,5 @@
      - storm
      - cassandra
      - es	
+     - redis
      - supervisor
