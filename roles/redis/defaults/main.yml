@@ -89,9 +89,9 @@ redis_maxclients: 10000
 # if you wanted to limit it to 80% of the total RAM you would input 0.8.
 redis_maxmemory_multiplier: 0.1
 
-redis_maxmemory: 50000000000
-redis_maxmemory_policy: 'volatile-lru'
-redis_maxmemory_samples: 5
+#redis_maxmemory: 50000000000
+#redis_maxmemory_policy: 'noeviction'
+#redis_maxmemory_samples: 5
 
 #### Append only mode ####
 
@@ -100,6 +100,12 @@ redis_appendfsync: always
 redis_no_appendfsync_on_rewrite: 'no'
 redis_auto_aof_rewrite_percentage: 100
 redis_auto_aof_rewrite_min_size: 64mb
+
+redis_master_appendfilename: "appendonly-master.aof"
+redis_master_appendfsync: 'no'
+redis_master_no_appendfsync_on_rewrite: 'no'
+redis_master_auto_aof_rewrite_percentage: 100
+redis_master_auto_aof_rewrite_min_size: 64mb
 
 
 ##### LUA SCRIPTING  #####
