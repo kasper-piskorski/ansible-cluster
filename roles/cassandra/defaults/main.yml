@@ -27,6 +27,8 @@ cassandra_num_tokens: 256
 
 cassandra_hosts: ["{{cassandra_host_address}}"]
 cassandra_seeds: ["{{cassandra_host_address}}"]
+
+cassandra_replication_factor: "{{cassandra_hosts | length }}"
 cassandra_read_consistency: ONE
 cassandra_write_consistency: ALL
 

@@ -19,7 +19,7 @@
   get_url: dest={{cluster_home}} url={{elasticsearch_download_url}}/{{elasticsearch_tarball_name}} owner={{user_name}} group={{group_name}}
 
 - name: Uncompress ElasticSearch package
-  unarchive: copy=no  dest={{cluster_home}} src="{{elasticsearch_download_url}}/{{elasticsearch_tarball_name}}" owner={{user_name}} group={{group_name}}
+  unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/{{elasticsearch_tarball_name}}" owner={{user_name}} group={{group_name}}
 
 - name: Remove archive
   file: path="{{cluster_home}}/{{elasticsearch_tarball_name}}" state=absent

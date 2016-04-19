@@ -43,37 +43,4 @@ serverurl=unix:///tmp/supervisor.sock ; use a unix:// URL  for a unix socket
 [include]
 files = /etc/supervisor/conf.d/*.conf
 
-[program:zk-server]
-command={{cluster_home}}/zookeeper/bin/zkServer.sh start-foreground
-user={{user_name}}
-autostart=true
-autorestart=true
-stdout_logfile={{log_home}}/zookeeper/zookeeper.log
-stdout_logfile_maxbytes=10MB
-stdout_logfile_backups=10
-stdout_events_enabled=true
-stderr_logfile={{log_home}}/zookeeper/zookeeper.err
-stderr_logfile_maxbytes=100MB
-stderr_logfile_backups=10
-stderr_events_enabled=true
-
-[group:storm]
-programs={% for daemon in storm_daemons %}storm-{{daemon}} {% if not loop.last %}, {% endif %}{% endfor %}
-
-{% for daemon in storm_daemons %}
-[program:storm-{{daemon}}]
-command={{cluster_home}}/storm/bin/storm {{daemon}}
-user={{user_name}}
-autostart=true
-autorestart=true
-stderr_logfile={{log_home}}/storm/{{daemon}}.err
-stderr_logfile_maxbytes=100MB
-stderr_logfile_backups=10
-stderr_events_enabled=true
-stdout_logfile={{log_home}}/storm/{{daemon}}.out
-stdout_logfile_maxbytes=10MB
-stdout_logfile_backups=10
-stdout_events_enabled=true
-
-{% endfor %}
 

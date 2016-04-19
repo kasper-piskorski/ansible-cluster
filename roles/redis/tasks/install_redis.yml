@@ -1,5 +1,5 @@
 ---
-- name: Create ElasticSearch log and local directories
+- name: Create Redis log and local directories
   file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
   with_items:
     - "{{redis_log_dir}}"
@@ -16,7 +16,7 @@
   get_url: dest={{cluster_home}} url={{redis_download_url}}/{{redis_tarball_name}} owner={{user_name}} group={{group_name}}
 
 - name: Uncompress Redis package
-  unarchive: copy=no  dest={{cluster_home}} src="{{redis_download_url}}/{{redis_tarball_name}}" owner={{user_name}} group={{group_name}}
+  unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/{{redis_tarball_name}}" owner={{user_name}} group={{group_name}}
 
 - name: Remove archive
   file: path="{{cluster_home}}/{{redis_tarball_name}}" state=absent

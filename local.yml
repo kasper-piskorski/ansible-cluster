@@ -5,13 +5,16 @@
     cluster_home: /opt/mindmaps/cluster
     log_home: /var/log/mindmaps/cluster
     storm_daemons: [nimbus, supervisor, ui, drpc]
+    zookeeper_hosts: [127.0.0.1]
+    supervised_processes: [zk, kafka]
 
   remote_user: root
   roles:
      #- common
-     #- zk
+     - zk
      #- storm
      #- cassandra
      #- es
-     - redis
-     #- supervisor
+     #- redis
+     - kafka
+     - supervisor

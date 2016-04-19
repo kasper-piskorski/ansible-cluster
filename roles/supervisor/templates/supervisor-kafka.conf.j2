@@ -1,0 +1,15 @@
+[program:kafka-broker]
+command={{cluster_home}}/kafka/bin/kafka-server-start.sh {{cluster_home}}/kafka/config/server.properties 
+user={{user_name}}
+autostart=false
+autorestart=true
+stdout_logfile={{log_home}}/kafka/kafka.log
+stdout_logfile_maxbytes=10MB
+stdout_logfile_backups=10
+stdout_events_enabled=true
+stderr_logfile={{log_home}}/kafka/kafka.err
+stderr_logfile_maxbytes=100MB
+stderr_logfile_backups=10
+stderr_events_enabled=true
+
+

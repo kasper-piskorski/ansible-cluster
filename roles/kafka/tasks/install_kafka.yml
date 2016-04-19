@@ -1,0 +1,25 @@
+---
+- name: Create Kafka log and local directories
+  file: path={{item}} state=directory owner={{user_name}} group={{group_name}} mode=755
+  with_items:
+    - "{{kafka_data_dir}}"
+    - "{{kafka_log_dir}}"
+
+- name: Fetch Kafka package
+  get_url: dest={{cluster_home}} url={{kafka_download_url}} owner={{user_name}} group={{group_name}}
+
+- name: Uncompress Kafka package
+  unarchive: copy=no  dest={{cluster_home}} src="{{cluster_home}}/{{kafka_tarball_name}}" owner={{user_name}} group={{group_name}}
+
+- name: Remove archive
+  file: path="{{cluster_home}}/{{kafka_tarball_name}}" state=absent
+
+- name: Rename
+  command: mv {{cluster_home}}/kafka_{{kafka_scala_version}}-{{kafka_version}} {{cluster_home}}/kafka
+
+- name: Configure Kafka
+  template: dest="{{kafka_home_dir}}/config/server.properties" owner={{user_name}} group={{group_name}} src=server.properties.j2
+
+
+
+  

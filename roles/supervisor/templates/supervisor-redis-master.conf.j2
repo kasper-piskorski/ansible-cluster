@@ -1,7 +1,7 @@
 [program:redis-master]
 command={{cluster_home}}/redis/bin/redis-server {{cluster_home}}/redis/redis-master.conf
 user={{user_name}}
-autostart=true
+autostart=false
 autorestart=false
 startsecs=10
 exitcodes=0

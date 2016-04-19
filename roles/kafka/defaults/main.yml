@@ -1,0 +1,38 @@
+---
+#### Apache Kafka settings #####
+
+kafka_mirror: http://apache.mirrors.tds.net
+kafka_version: 0.9.0.1
+kafka_scala_version: 2.11
+kafka_tarball_name: kafka_{{kafka_scala_version}}-{{kafka_version}}.tgz
+kafka_download_url: "{{kafka_mirror}}/kafka/{{kafka_version}}/{{kafka_tarball_name}}"
+
+kafka_home_dir: "{{cluster_home}}/kafka"
+kafka_log_dir: "{{log_home}}/kafka"
+kafka_data_dir: /var/lib/kafka
+
+kafka_hosts: ["{{host_address}}"]
+zookeeper_hosts: ["{{host_address}}"]
+
+kafka_listen_address: "{{host_address}}"
+kafka_num_network_threads: 2
+kafka_num_io_threads: 2
+kafka_num_partitions: "{{kafka_hosts | length }}"
+kafka_port: 9092
+
+kafka_socket_send_buffer_bytes: 1048576
+kafka_socket_receive_buffer_bytes: 1048576
+kafka_socket_request_max_bytes: 104857600
+kafka_log_flush_interval_messages: 10000
+kafka_log_flush_interval_ms: 1000
+kafka_log_retention_bytes: 104857600  #100 M
+kafka_log_retention_hours: 336 # 2 weeks
+kafka_log_segment_bytes: "{{kafka_log_retention_bytes}}"
+kafka_log_cleanup_interval_mins: 1
+kafka_heap_opts: "-Xmx1G -Xms1G"
+zookeeper_connection_timeout_ms: 1000000
+
+
+
+
+

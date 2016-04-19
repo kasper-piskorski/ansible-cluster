@@ -3,6 +3,8 @@
   hosts: graph-servers
   remote_user: kasper
   sudo: yes
+  vars:
+    supervised_processes: [zk, storm, cassandra, es, redis]
 
   roles:
      - common

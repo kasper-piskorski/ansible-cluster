@@ -1,14 +1,26 @@
 ---
+#### Global settings ####
 
-cluster_home: /opt/mindmaps/cluster
+host_address: "{{ansible_default_ipv4.address}}"
+root_dir: /opt
+cluster_path: mindmaps/cluster
+cluster_home: "{{root_dir}}/{{cluster_path}}"
 resource_home: /opt/mindmaps/resources
-log_home: /var/log/mindmaps/cluster
+log_home : "/var/log/{{cluster_path}}"
+
+#user and group running the cluster
+user_name: mindmaps
+group_name: mindmaps
+
+##### ZK #####
 
 zk_version: 3.4.6
 zookeeper_client_port: 2181
 zookeeper_hosts: [ core-plx122, core-plx124, gm-plx133, core-plx121 ]
 zookeeper_purge_interval: 2
 zookeeper_snap_retain_count: 3
+
+##### STORM #####
 
 storm_version: 0.10.0
 storm_local_dir: "{{cluster_home}}/storm/local"

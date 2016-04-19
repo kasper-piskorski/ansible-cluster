@@ -1,25 +1,41 @@
 
 {% include "supervisor-base.conf.j2" %}
 
-{% if database == "cassandra" %}
-{% include "supervisor-cassandra.conf.j2" %}
-
-{% elif database == "cassandra-es" %}
-{% include "supervisor-cassandra.conf.j2" %}
-{% include "supervisor-elasticsearch.conf.j2" %}
-
-{% elif database == "neo4j" %}
-{% include "supervisor-neo4j.conf.j2" %}
-
-{% elif database == "neo4j-ha" %}
-{% include "supervisor-neo4j-ha.conf.j2" %}
-
+{% if 'zk' in supervised_processes %}
+{% include "supervisor-zk.conf.j2" %}
 {% endif %}
 
-{% if 'master' in redis_roles %}
+{% if 'storm' in supervised_processes %}
+{% include "supervisor-storm.conf.j2" %}
+{% endif %}
+
+{% if 'cassandra' in supervised_processes%}
+{% include "supervisor-cassandra.conf.j2" %}
+{% endif %}
+
+{% if 'es' in supervised_processes %}
+{% include "supervisor-elasticsearch.conf.j2" %}
+{% endif %}
+
+{% if 'neo4j' in supervised_processes %}
+{% include "supervisor-neo4j.conf.j2" %}
+{% endif %}
+
+{% if 'neo4j' in supervised_processes and database == "neo4j-ha" %}
+{% include "supervisor-neo4j-ha.conf.j2" %}
+{% endif %}
+
+{% if 'redis' in supervised_processes and 'master' in redis_roles %}
 {% include "supervisor-redis-master.conf.j2" %}
 {% endif %}
 
-{% if 'slave' in redis_roles %}
+{% if 'redis' in supervised_processes and 'slave' in redis_roles %}
 {% include "supervisor-redis-slave.conf.j2" %}
 {% endif %}
+
+{% if 'kafka' in supervised_processes %}
+{% include "supervisor-kafka.conf.j2" %}
+{% endif %}
+
+
+

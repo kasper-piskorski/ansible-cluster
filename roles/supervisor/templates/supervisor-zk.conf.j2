@@ -1,0 +1,15 @@
+[program:zk-server]
+command={{cluster_home}}/zookeeper/bin/zkServer.sh start-foreground
+user={{user_name}}
+autostart=true
+autorestart=true
+stdout_logfile={{log_home}}/zookeeper/zookeeper.log
+stdout_logfile_maxbytes=10MB
+stdout_logfile_backups=10
+stdout_events_enabled=true
+stderr_logfile={{log_home}}/zookeeper/zookeeper.err
+stderr_logfile_maxbytes=100MB
+stderr_logfile_backups=10
+stderr_events_enabled=true
+
+
