@@ -4,17 +4,30 @@
   vars:
     cluster_home: /opt/mindmaps/cluster
     log_home: /var/log/mindmaps/cluster
-    storm_daemons: [nimbus, supervisor, ui, drpc]
+    storm_daemons: [nimbus, supervisor, ui]
     zookeeper_hosts: [127.0.0.1]
-    supervised_processes: [zk, kafka]
+    storm_nimbus_host: 127.0.0.1
+    storm_nimbus_seeds: [127.0.0.1]
+    storm_drpc_hosts: [127.0.0.1]
+    cassandra_host_address: 127.0.0.1
+    cassandra_listen_address: 127.0.0.1
+    cassandra_rpc_address: 127.0.0.1
+    cassandra_hosts: [127.0.0.1]
+    cassandra_seeds: [127.0.0.1]
+    elasticsearch_network_host: 127.0.0.1
+    elasticsearch_hosts: [127.0.0.1]
+    elasticsearch_index_number_of_shards: 1
+    elasticsearch_index_number_of_replicas: 0
+    kafka_hosts: [127.0.0.1]
+    supervised_processes: [zk, storm, cassandra, es, redis, kafka]
 
   remote_user: root
   roles:
      #- common
-     - zk
+     #- zk
      #- storm
      #- cassandra
-     #- es
+     - es
      #- redis
-     - kafka
-     - supervisor
+     #- kafka
+     #- supervisor

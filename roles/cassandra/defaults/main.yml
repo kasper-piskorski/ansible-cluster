@@ -20,8 +20,6 @@ cassandra_archive_mirror: "http://archive.apache.org/dist/cassandra/{{cassandra_
 cassandra_tarball_name: "apache-cassandra-{{cassandra_version}}-bin.tar.gz"
 
 cassandra_host_address: "{{host_address}}"
-cassandra_listen_address: "{{cassandra_host_address}}"
-cassandra_rpc_address: "{{cassandra_host_address}}"
 
 cassandra_num_tokens: 256
 

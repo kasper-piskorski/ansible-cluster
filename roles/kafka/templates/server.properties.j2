@@ -14,7 +14,7 @@ port={{kafka_port}}
 
 # Hostname the broker will bind to. If not set, the server will bind to all interfaces
 {% if kafka_listen_address is defined %}
-host.name={{kafka_listen_address}}
+host.name={% for host in kafka_hosts %}{% if host == ansible_fqdn or host == ansible_default_ipv4.address or host == ansible_hostname %}{{host}}{% endif %}{% endfor %}
 {% else %}
 #host.name=localhost
 {% endif %}
