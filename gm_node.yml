@@ -10,7 +10,7 @@
      - common
      - zk
      - storm
-     - cassandra
-     - es	
-     - redis
-     - supervisor
+     #- cassandra
+     #- es	
+     #- redis
+     #- supervisor

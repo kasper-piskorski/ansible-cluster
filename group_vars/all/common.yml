@@ -1,4 +1,5 @@
 ---
+
 #### Global settings ####
 
 host_address: "{{ansible_default_ipv4.address}}"
@@ -12,50 +13,12 @@ log_home : "/var/log/{{cluster_path}}"
 user_name: mindmaps
 group_name: mindmaps
 
-##### ZK #####
-
 zk_version: 3.4.6
 zookeeper_client_port: 2181
-zookeeper_hosts: [ core-plx122, core-plx124, gm-plx133, core-plx121 ]
-zookeeper_purge_interval: 2
-zookeeper_snap_retain_count: 3
-
-##### STORM #####
 
 storm_version: 0.10.0
 storm_local_dir: "{{cluster_home}}/storm/local"
 storm_log_dir: "{{log_home}}/storm" 
-storm_nimbus_host: gm-plx133
-storm_nimbus_seeds: [ gm-plx133 ]
-storm_drpc_hosts: [ gm-plx133 ]
-
-storm_drpc_extra_config:
-    drpc.request.timeout.secs: 1200
-    drpc.worker.threads: 64
-    drpc.max_buffer_size: 10485760
-    drpc.queue.size: 128
-    drpc.invocations.threads: 64
-    drpc.childopts: "-Xmx1g"
-storm_worker_extra_config:   
-    worker.childopts: -Xmx32g
-storm_nimbus_extra_config:
-    nimbus.childopts: "-Xmx4g "
-    nimbus.task.timeout.secs: 300
-    nimbus.supervisor.timeout.secs: 300
-storm_supervisor_extra_config:
-    supervisor.childopts: "-Xmx4g "
-    supervisor.worker.timeout.secs: 300
-storm_topology_extra_config:
-    topology.acker.executors: 1
-    topology.debug: false
-    topology.message.timeout.secs: 300
-    topology.worker.shared.thread.pool.size: 8
-    topology.trident.batch.emit.interval.millis: 100
-
-
-storm_ui_port: 8081
-storm_ui_extra_config:
-    ui.childopts: "-Xmx768m"
 
 database: cassandra-es
 
@@ -63,37 +26,22 @@ database: cassandra-es
 
 cassandra_version: 2.1.9
 cassandra_num_tokens: 256
-cassandra_hosts: [ core-plx122, core-plx124, gm-plx133, core-plx121 ]
-cassandra_seeds: [ core-plx122, gm-plx133 ]
-
 cassandra_read_consistency: ONE
-cassandra_write_consistency: ONE
+cassandra_write_consistency: ALL
 cassandra_replication_factor: "{{cassandra_hosts | length }}"
-cassandra_frame_size: 60
-titan_cache_time: 5259492000
-titan_cache_size: 0.99
-
 cassandra_dir: /var/lib/cassandra
 cassandra_data_dir: "{{cassandra_dir}}/data"
 cassandra_commitlog_dir: "{{cassandra_dir}}/commitlog"
 cassandra_saved_caches_dir: "{{cassandra_dir}}/saved_caches"
-cassandra_hints_dir: "{{cassandra_dir}}/hints"
-cassandra_key_cache_size_in_mb: 16384
-cassandra_key_cache_save_period: 1440000
-cassandra_row_cache_size_in_mb: 4096
-cassandra_row_cache_save_period: 14400
-cassandra_concurrent_reads: 128
-cassandra_concurrent_writes: 128
+cassandra_hints_dir : "{{cassandra_dir}}/hints"
+
+cassandra_concurrent_reads: 16
+cassandra_concurrent_writes: 16
+
 
 ##### ELASTICSEARCH #####
 
 elasticsearch_version: 1.5.1
-
-elasticsearch_discovery_zen_ping_multicast_enabled: false
-elasticsearch_hosts: [core-plx122, core-plx124, gm-plx133, core-plx121]
-
-elasticsearch_network_transport_tcp_port: 9300
-elasticsearch_network_http_port: 9200
 
 elasticsearch_home_dir: "{{cluster_home}}/elasticsearch" 
 elasticsearch_plugin_dir: "{{cluster_home}}/elasticsearch/plugins"
@@ -101,8 +49,4 @@ elasticsearch_log_dir: "{{log_home}}/elasticsearch"
 elasticsearch_data_dir: /var/lib/elasticsearch/data
 elasticsearch_work_dir: /var/lib/elasticsearch/work
 elasticsearch_conf_dir: "{{elasticsearch_home_dir}}/config"
-
-
-
-
 

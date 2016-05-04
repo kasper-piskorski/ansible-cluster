@@ -1,15 +1,4 @@
 ---
-#### Global settings ####
-
-host_address: "{{ansible_default_ipv4.address}}"
-root_dir: /opt
-cluster_path: mindmaps/cluster
-cluster_home: "{{root_dir}}/{{cluster_path}}"
-log_home : "/var/log/{{cluster_path}}"
-
-#user and group running the cluster
-user_name: mindmaps
-group_name: mindmaps
 
 #### STORM settings ####
 
@@ -23,6 +12,7 @@ storm_drpc_hosts: ["{{host_address}}"]
 
 nimbus_thrift_port: 6627
 storm_java_library_path: "/usr/local/lib:/opt/local/lib:/usr/lib"
+storm_zookeeper_hosts: ["{{host_address}}"]
 storm_zookeeper_port: "{{zookeeper_client_port}}"
 
 storm_drpc_extra_config:

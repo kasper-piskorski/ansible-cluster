@@ -5,7 +5,7 @@ storm.local.dir: "{{storm_local_dir}}"
 
 ### zookeeper.*
 storm.zookeeper.servers:
-{% for host in zookeeper_hosts %}
+{% for host in storm_zookeeper_hosts %}
     - "{{host}}"
 {% endfor %}
 {% if storm_zookeeper_extra_config.items is defined %}
@@ -63,7 +63,7 @@ drpc.servers:
 
 ### transactional.* configs
 transactional.zookeeper.servers:
-{% for host in zookeeper_hosts %}
+{% for host in storm_zookeeper_hosts %}
     - "{{host}}"
 {% endfor %}
 {% if storm_transactional_extra_config.items is defined %}
