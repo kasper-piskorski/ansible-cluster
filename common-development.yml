@@ -27,7 +27,7 @@ database: cassandra-es
 cassandra_version: 2.1.9
 cassandra_num_tokens: 256
 cassandra_read_consistency: ONE
-cassandra_write_consistency: ALL
+cassandra_write_consistency: ONE
 cassandra_replication_factor: "{{cassandra_hosts | length }}"
 cassandra_dir: /var/lib/cassandra
 cassandra_data_dir: "{{cassandra_dir}}/data"

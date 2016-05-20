@@ -13,4 +13,16 @@
 10.10.10.102
 
 [test-servers]
-core-tlx123 ansible_port=32022 ansible_host=10.10.10.100 
+tgm-clx04 ansible_port=32022 ansible_host=10.10.10.100 
+
+[tgm-clx01]
+tgm-clx01 ansible_port=12022 ansible_host=10.10.10.100 
+
+[tgm-clx03]
+tgm-clx03 ansible_port=12022 ansible_host=10.10.10.120 
+
+[tgm-clx04]
+tgm-clx04 ansible_port=32022 ansible_host=10.10.10.100 
+
+[etl-clx01]
+etl-clx01 ansible_port=12022 ansible_host=10.10.20.108

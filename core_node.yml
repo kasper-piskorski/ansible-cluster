@@ -1,15 +1,17 @@
 ---
-- name: Core cluster deployment on core node
+- name: Core cluster deployment on core nodes
   hosts: core-servers
   remote_user: kasper
   sudo: yes
   vars:
+    zk_version: 3.4.8
+    storm_version: 1.0.1
     supervised_processes: [zk, storm, cassandra, es]
 
   roles:
-     - common
-     - zk
+     #- common
+     #- zk
      - storm
-     - cassandra
-     - es
-     - supervisor
+     #- cassandra
+     #- es
+     #- supervisor

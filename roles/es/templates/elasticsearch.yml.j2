@@ -285,7 +285,7 @@ network.publish_host: {{ elasticsearch_network_publish_host }}
 # Set both 'bind_host' and 'publish_host':
 #
 # network.host: 192.168.0.1
-{% if elasticsearch_network_host is defined %}
+{% if elasticsearch_hosts is defined %}
 network.host: {% for host in elasticsearch_hosts %}{% if host == ansible_fqdn or host == ansible_default_ipv4.address or host == ansible_hostname %}{{host}}{% endif %}{% endfor %}
 {% endif %}
 

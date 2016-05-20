@@ -4,5 +4,3 @@
 [graph-servers]
 127.0.0.1
 
-[test-servers]
-10.10.10.100 ansible_port=32022

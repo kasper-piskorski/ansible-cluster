@@ -35,13 +35,14 @@ storm_drpc_extra_config:
     drpc.invocations.threads: 64
     drpc.childopts: "-Xmx1g"
 storm_worker_extra_config:   
-    worker.childopts: -Xmx32g
+    worker.childopts: -Xmx32g 
+
 storm_nimbus_extra_config:
-    nimbus.childopts: "-Xmx4g "
+    nimbus.childopts: "-Xmx1g "
     nimbus.task.timeout.secs: 300
     nimbus.supervisor.timeout.secs: 300
 storm_supervisor_extra_config:
-    supervisor.childopts: "-Xmx4g "
+    supervisor.childopts: "-Xmx1g "
     supervisor.worker.timeout.secs: 300
 storm_topology_extra_config:
     topology.acker.executors: 1
@@ -49,7 +50,6 @@ storm_topology_extra_config:
     topology.message.timeout.secs: 300
     topology.worker.shared.thread.pool.size: 8
     topology.trident.batch.emit.interval.millis: 100
-
 
 storm_ui_port: 8081
 storm_ui_extra_config:
@@ -92,6 +92,9 @@ elasticsearch_hosts: [core-plx122, core-plx124, gm-plx133, core-plx121]
 
 elasticsearch_network_transport_tcp_port: 9300
 elasticsearch_network_http_port: 9200
+
+elasticsearch_index_number_of_shards: 5
+elasticsearch_index_number_of_replicas: 0
 
 elasticsearch_home_dir: "{{cluster_home}}/elasticsearch" 
 elasticsearch_plugin_dir: "{{cluster_home}}/elasticsearch/plugins"

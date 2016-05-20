@@ -28,7 +28,7 @@ cassandra_seeds: ["{{cassandra_host_address}}"]
 
 cassandra_replication_factor: "{{cassandra_hosts | length }}"
 cassandra_read_consistency: ONE
-cassandra_write_consistency: ALL
+cassandra_write_consistency: ONE
 
 cassandra_data_dir: /var/lib/cassandra/data
 cassandra_commitlog_dir: /var/lib/cassandra/commitlog

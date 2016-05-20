@@ -21,6 +21,7 @@ elasticsearch_version: 1.5.1
 elasticsearch_tarball_name: "elasticsearch-{{elasticsearch_version}}.tar.gz"
 
 elasticsearch_cluster_name: elasticsearch
+elasticsearch_hosts: ["{{host_address}}"]
 elasticsearch_titan_scripting: true
 
 elasticsearch_discovery_zen_ping_multicast_enabled: false
@@ -28,8 +29,8 @@ elasticsearch_discovery_zen_ping_multicast_enabled: false
 elasticsearch_network_transport_tcp_port: 9300
 elasticsearch_network_http_port: 9200
 
-elasticsearch_index_number_of_shards: "{{elasticsearch_hosts | length }}"
-elasticsearch_index_number_of_replicas: "{{elasticsearch_hosts | length }}"
+elasticsearch_index_number_of_shards: 5
+elasticsearch_index_number_of_replicas: 0
 
 elasticsearch_home_dir: "{{cluster_home}}/elasticsearch" 
 elasticsearch_plugin_dir: "{{cluster_home}}/elasticsearch/plugins"

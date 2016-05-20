@@ -4,10 +4,14 @@
   remote_user: kasper
   sudo: yes
   vars:
+    zk_version: 3.4.8
+    storm_version: 1.0.1
+    storm_worker_extra_config:
+      worker.childopts: -Xmx32g 
     supervised_processes: [zk, storm, cassandra, es, redis]
 
   roles:
-     - common
+     #- common
      - zk
      - storm
      #- cassandra
